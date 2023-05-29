@@ -1,0 +1,239 @@
+.btn.btn-rounded {
+  border-radius: 50px;
+  font-weight: 700;
+}
+.btn.btn-success {
+  background-color: #05D758;
+  border-color: #05D758;
+  color: #1E1E1E;
+}
+.btn.btn-secondary {
+  background-color: #F5F5F5;
+  border-color: #F5F5F5;
+  color: #1E1E1E;
+}
+
+.liveness-2d .overlay {
+  background-color: #000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+.liveness-2d .liveness-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+}
+.liveness-2d .liveness-area .divMsg {
+  position: absolute;
+  top: 20px;
+  margin: 0 46%;
+  background-color: #000;
+  color: #fff;
+  padding: 8px;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+.liveness-2d .liveness-area .divCloseButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.liveness-2d .liveness-area .content-video {
+  text-align: center;
+}
+.liveness-2d .liveness-area .content-video video {
+  height: 100vh;
+}
+.liveness-2d .liveness-area .divButton {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+  text-align: center;
+}
+
+.liveness-2d-result .overlay {
+  background-color: #000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.liveness-2d-result .overlay.success {
+  background-color: #1B7D2C;
+  z-index: 9;
+}
+.liveness-2d-result .result-text {
+  top: 0;
+  left: 0;
+  z-index: 9;
+  color: #fff;
+}
+
+.wrapping-box-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transform: none !important;
+}
+.wrapping-box-container .controls {
+  width: -moz-max-content;
+  width: max-content;
+  text-align: center;
+  border: solid 4px #1648cd !important;
+  border-radius: 24px;
+  padding: 24px;
+  width: 550px;
+}
+@media (min-width: 320px) and (max-width: 414px) {
+  .wrapping-box-container .controls {
+    width: 95%;
+  }
+}
+.wrapping-box-container .controls img {
+  width: 250px;
+}
+@media (min-width: 320px) and (max-width: 414px) {
+  .wrapping-box-container .controls img {
+    width: 150px;
+  }
+}
+
+.overlay {
+  background-color: #000;
+  opacity: 0.8;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.send-document-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.send-document-area .div-msg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: -moz-max-content;
+  width: max-content;
+  height: -moz-max-content;
+  height: max-content;
+  z-index: 9;
+  background-color: #000;
+  border-radius: 50px;
+  padding: 5px 14px;
+}
+.send-document-area .div-msg span {
+  color: #fff;
+}
+.send-document-area .progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 45%;
+  z-index: 9;
+}
+.send-document-area video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: 100vh;
+}
+.send-document-area .thumb-picture, .send-document-area .thumbs-group {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 45%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  overflow-y: auto;
+}
+.send-document-area .thumb-picture > div, .send-document-area .thumbs-group > div {
+  width: 50%;
+}
+.send-document-area .thumb-picture > div p, .send-document-area .thumbs-group > div p {
+  text-align: center;
+  font-weight: 700;
+  font-size: 25px;
+}
+.send-document-area .thumb-picture > div img, .send-document-area .thumbs-group > div img {
+  width: 100%;
+}
+.send-document-area .thumb-picture > div button, .send-document-area .thumbs-group > div button {
+  display: flex !important;
+  align-items: center;
+}
+.send-document-area .btn-controllers {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  margin: 0 auto;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.modal-backdrop.show {
+  opacity: 0.8 !important;
+}
+
+.modal.show .modal-dialog .modal-content {
+  border-radius: 24px;
+  padding: 40px;
+}
+.modal.show .modal-dialog .modal-content .modal-header {
+  border-bottom: 0;
+  padding: 0;
+}
+.modal.show .modal-dialog .modal-content .modal-header .modal-title, .modal.show .modal-dialog .modal-content .modal-header .btn-close {
+  display: none;
+}
+.modal.show .modal-dialog .modal-content .modal-body {
+  padding: 0;
+}
+.modal.show .modal-dialog .modal-content .modal-body p {
+  font-weight: 700;
+}
+.modal.show .modal-dialog .modal-content .modal-footer {
+  border-top: 0;
+  padding: 0;
+}
+
+@media (min-width: 576px) {
+  .modal-sm {
+    --bs-modal-width: 446px;
+  }
+}/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,31 @@
+.modal-backdrop.show {
+  opacity: 0.8 !important;
+}
+
+.modal.show .modal-dialog .modal-content {
+  border-radius: 24px;
+  padding: 40px;
+}
+.modal.show .modal-dialog .modal-content .modal-header {
+  border-bottom: 0;
+  padding: 0;
+}
+.modal.show .modal-dialog .modal-content .modal-header .modal-title, .modal.show .modal-dialog .modal-content .modal-header .btn-close {
+  display: none;
+}
+.modal.show .modal-dialog .modal-content .modal-body {
+  padding: 0;
+}
+.modal.show .modal-dialog .modal-content .modal-body p {
+  font-weight: 700;
+}
+.modal.show .modal-dialog .modal-content .modal-footer {
+  border-top: 0;
+  padding: 0;
+}
+
+@media (min-width: 576px) {
+  .modal-sm {
+    --bs-modal-width: 446px;
+  }
+}/*# sourceMappingURL=modal.css.map */
