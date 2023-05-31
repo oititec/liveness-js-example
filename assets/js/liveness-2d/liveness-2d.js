@@ -122,22 +122,22 @@ const startCapture = () => {
 };
 
 const getChallengeFromLib = async () => {
-  // const facecaptchaService = new FaceCaptcha(axios, {
-  //   BaseURL: process.env.REACT_APP_BASE_URL,
-  // });
+  const facecaptchaService = new FaceCaptcha(axios, {
+    BaseURL: process.env.REACT_APP_BASE_URL,
+  });
 
-  // const result = await facecaptchaService.startChallenge({
-  //   appKey: staticAppKey,
-  // });
+  const result = await facecaptchaService.startChallenge({
+    appKey: staticAppKey,
+  });
 
-  // challenge = result;
+  challenge = result;
 
-  // if (result.challenges.length > 0) {
-  //   message = '';
-  //   isLoaded = false;
+  if (result.challenges.length > 0) {
+    message = '';
+    isLoaded = false;
 
-  //   showSpanMessage(message);
-  // }
+    showSpanMessage(message);
+  }
 
   prepareChallenge(0);
 };
