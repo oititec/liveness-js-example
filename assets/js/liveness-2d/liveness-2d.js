@@ -1,3 +1,7 @@
+const FaceCaptcha = require([
+  '/assets/js/facecaptcha/domain/service/facecaptcha.service.js',
+]);
+
 let body = document.getElementsByTagName('body');
 let appkey = window.localStorage.getItem('appkey');
 let btnShowLiveness2d = document.getElementById('btn-show-liveness-2d');
@@ -123,11 +127,11 @@ const startCapture = () => {
 
 const getChallengeFromLib = async () => {
   const facecaptchaService = new FaceCaptcha(axios, {
-    BaseURL: process.env.REACT_APP_BASE_URL,
+    BaseURL: env.REACT_APP_BASE_URL,
   });
 
   const result = await facecaptchaService.startChallenge({
-    appKey: staticAppKey,
+    appKey: appkey,
   });
 
   challenge = result;
@@ -185,7 +189,7 @@ const stopChallenge = () => {
   showImgMsg(msgBase64);
   showImgChallenge(emojiBase64);
 
-  getLivenessCaptchaFromLib(staticAppKey, challenge.chkey, fcvarSnaps);
+  getLivenessCaptchaFromLib(appkey, challenge.chkey, fcvarSnaps);
 };
 
 const snapTick = (fcvarCurCha) => {
