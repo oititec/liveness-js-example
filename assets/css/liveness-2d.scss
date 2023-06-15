@@ -1,0 +1,75 @@
+.liveness-2d {
+  .overlay {
+    background-color: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: .8;
+  }
+
+  .liveness-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+
+    .divMsg {
+      position: absolute;
+      top: 20px;
+      margin: 0 46%;
+      background-color: #000;
+      color: #fff;
+      padding: 8px;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+
+    .divCloseButton {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .content-video {
+      text-align: center;
+
+      video {
+        height: 100vh;
+      }
+    }
+
+    .divButton {
+      position: absolute;
+      bottom: 50px;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+.liveness-2d-result {
+  .overlay {
+    background-color: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    &.success {
+      background-color: #1B7D2C;
+      z-index: 9;
+    }
+  }
+
+  .result-text {
+    top: 0;
+    left: 0;
+    z-index: 9;
+    color: #fff;
+  }
+}

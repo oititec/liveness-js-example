@@ -1,0 +1,14 @@
+.btn.btn-rounded {
+  border-radius: 50px;
+  font-weight: 700;
+}
+.btn.btn-success {
+  background-color: #05D758;
+  border-color: #05D758;
+  color: #1E1E1E;
+}
+.btn.btn-secondary {
+  background-color: #F5F5F5;
+  border-color: #F5F5F5;
+  color: #1E1E1E;
+}/*# sourceMappingURL=misc.css.map */

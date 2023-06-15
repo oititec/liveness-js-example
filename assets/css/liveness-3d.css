@@ -1,0 +1,28 @@
+.wrapping-box-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transform: none !important;
+}
+.wrapping-box-container .controls {
+  width: -moz-max-content;
+  width: max-content;
+  text-align: center;
+  border: solid 4px #1648cd !important;
+  border-radius: 24px;
+  padding: 24px;
+  width: 550px;
+}
+@media (min-width: 320px) and (max-width: 414px) {
+  .wrapping-box-container .controls {
+    width: 95%;
+  }
+}
+.wrapping-box-container .controls img {
+  width: 250px;
+}
+@media (min-width: 320px) and (max-width: 414px) {
+  .wrapping-box-container .controls img {
+    width: 150px;
+  }
+}/*# sourceMappingURL=liveness-3d.css.map */

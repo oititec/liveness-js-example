@@ -1,0 +1,44 @@
+.modal-backdrop {
+  &.show {
+    opacity: .8 !important;
+  }
+}
+
+.modal {
+  &.show {
+    .modal-dialog {
+      .modal-content {
+        border-radius: 24px;
+        padding: 40px;
+
+        .modal-header {
+          border-bottom: 0;
+          padding: 0;
+
+          .modal-title, .btn-close {
+            display: none;
+          }
+        }
+
+        .modal-body {
+          padding: 0;
+
+          p {
+            font-weight: 700;
+          }
+        }
+        
+        .modal-footer {
+          border-top: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .modal-sm {
+    --bs-modal-width: 446px;
+  }
+}
