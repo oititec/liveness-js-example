@@ -1,7 +1,3 @@
-const FaceCaptcha = require([
-  '/assets/js/facecaptcha/domain/service/facecaptcha.service.js',
-]);
-
 let body = document.getElementsByTagName('body');
 let appkey = window.localStorage.getItem('appkey');
 let btnShowLiveness2d = document.getElementById('btn-show-liveness-2d');
@@ -59,13 +55,6 @@ const initialState = () => {
   showImgChallenge();
 };
 
-const handleClose = () => {
-  show = false;
-
-  window.localStorage.removeItem('errorMessage');
-};
-const handleShow = () => setShow(true);
-
 const showLiveness2D = () => {
   body[0].style.overflow = 'hidden';
 
@@ -122,14 +111,10 @@ const startCapture = () => {
   showHideDivMsg();
   showHideDivButton();
 
-  getChallengeFromLib(); // voltar aqui
+  getChallengeFromLib();
 };
 
 const getChallengeFromLib = async () => {
-  const facecaptchaService = new FaceCaptcha(axios, {
-    BaseURL: env.REACT_APP_BASE_URL,
-  });
-
   const result = await facecaptchaService.startChallenge({
     appKey: appkey,
   });
@@ -267,20 +252,11 @@ const snap = () => {
 };
 
 const getLivenessCaptchaFromLib = async (appkey, chkey, images) => {
-  const facecaptchaService = new FaceCaptcha(axios, {
-    BaseURL: process.env.REACT_APP_BASE_URL,
-    timeout: 20000,
-  });
+  const result = await facecaptchaService.captcha(appkey, chkey, images);
 
-  const parameters = {
-    appkey: appkey,
-    chkey: chkey,
-    images: Crypto.encChData(images, appkey),
-  };
+  let resultCaptcha = JSON.parse(result);
 
-  const result = await facecaptchaService.liveness2DCheck(parameters);
-
-  if (result.valid === true) {
+  if (resultCaptcha.valid === true) {
     livenessSuccess = true;
     livenessError = false;
 
@@ -296,12 +272,9 @@ const getLivenessCaptchaFromLib = async (appkey, chkey, images) => {
     livenessError = true;
 
     setTimeout(() => {
-      window.localStorage.setItem(
-        'errorMessage',
-        `${result.codID} - ${result.cause}`
-      );
+      errorMessage.innerHTML = `${resultCaptcha.codID} - ${resultCaptcha.cause}`;
 
-      livenessError && handleShow();
+      livenessError && showHideDivError();
 
       closeLiveness2D(appkey);
     }, 1000);
@@ -335,6 +308,17 @@ const showHideDivConfirmSuccess = () => {
     : liveness2DResult.classList.add('d-none');
 };
 
+const showHideDivError = () => {
+  livenessError
+    ? (modalError.classList.remove('d-none'),
+      modalError.classList.add('show'),
+      (modalError.style.display = 'block'),
+      (modalError.style.background = 'rgba(0,0,0,.8)'))
+    : (modalError.classList.add('d-none'),
+      modalError.classList.remove('show'),
+      modalError.removeAttribute('style'));
+};
+
 const showImgMsg = (img) => {
   imgMsg.setAttribute('src', img);
 };
@@ -363,6 +347,10 @@ window.onload = () => {
   });
 
   btnFecharModal.addEventListener('click', () => {
-    handleClose();
+    modalError.classList.add('d-none');
+    modalError.classList.remove('show');
+    modalError.removeAttribute('style');
+
+    window.localStorage.removeItem('errorMessage');
   });
 };

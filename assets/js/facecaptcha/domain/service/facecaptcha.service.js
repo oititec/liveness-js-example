@@ -38,9 +38,13 @@ const AxiosClientAdapter = require([
 const GenericException = require([
   '/assets/js/facecaptcha/core/exceptions/base.exception.js',
 ]);
-if (typeof module === 'object') {
-  module.exports = class FaceCaptcha {
-    constructor(client, options) {
+
+const FaceCaptcha = () => {
+  let options = null;
+  let client = null;
+
+  return {
+    initialize: (client, options) => {
       this.options = options;
       this.httpClient = new AxiosClientAdapter(
         client,
@@ -48,8 +52,8 @@ if (typeof module === 'object') {
         null,
         options.timeout
       );
-    }
-    getProductionKey(appKey) {
+    },
+    getProductionKey: (appKey) => {
       return __awaiter(this, void 0, void 0, function* () {
         const host = this.options.BaseURL.replace(/http(s)?:\/\//, '');
         try {
@@ -75,11 +79,11 @@ if (typeof module === 'object') {
           );
         }
       });
-    }
-    decryptProductionKey(key, appKey) {
+    },
+    decryptProductionKey: (key, appKey) => {
       return JSON.parse(decrypt(key, appKey.appKey));
-    }
-    startChallenge(appKey) {
+    },
+    startChallenge: (appKey) => {
       return __awaiter(this, void 0, void 0, function* () {
         try {
           const data = qs.stringify({
@@ -101,11 +105,11 @@ if (typeof module === 'object') {
           );
         }
       });
-    }
-    decryptChallengeKey(key, appKey) {
+    },
+    decryptChallengeKey: (key, appKey) => {
       return JSON.parse(decrypt(key, appKey.appKey));
-    }
-    getSessionToken(session) {
+    },
+    getSessionToken: (session) => {
       return __awaiter(this, void 0, void 0, function* () {
         try {
           const result = yield this.httpClient.post(
@@ -124,11 +128,11 @@ if (typeof module === 'object') {
           );
         }
       });
-    }
-    decryptSessionToken(key, appKey) {
+    },
+    decryptSessionToken: (key, appKey) => {
       return JSON.parse(decrypt(key, appKey));
-    }
-    liveness3DCheck(parameters) {
+    },
+    liveness3DCheck: (parameters) => {
       return __awaiter(this, void 0, void 0, function* () {
         try {
           const result = yield this.httpClient.post(
@@ -146,8 +150,8 @@ if (typeof module === 'object') {
           );
         }
       });
-    }
-    liveness2DCheck(parameters) {
+    },
+    liveness2DCheck: (parameters) => {
       return __awaiter(this, void 0, void 0, function* () {
         try {
           const data = new URLSearchParams();
@@ -169,8 +173,8 @@ if (typeof module === 'object') {
           );
         }
       });
-    }
-    sendDocument(parameters) {
+    },
+    sendDocument: (parameters) => {
       return __awaiter(this, void 0, void 0, function* () {
         try {
           const result = yield this.httpClient.post(
@@ -189,6 +193,10 @@ if (typeof module === 'object') {
           );
         }
       });
-    }
+    },
   };
+};
+
+if (typeof module === 'object') {
+  module.exports = FaceCaptcha;
 }

@@ -12,14 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
     integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js"
-    integrity="sha512-/l6vieC+YxaZywUhmqs++8uF9DeMvJE61ua5g+UK0TuHZ4TkTgB1Gm1n0NiA86uEOM9JJ6JUwyR0hboKO0fCng=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
-    integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script type="module" src="/assets/js/facecaptcha/index.js"></script>
+  <script src="/assets/js/facecaptcha/crypto.js"></script>
 </head>
 
 <body>
@@ -120,7 +113,7 @@
     </div>
 
     <div class="modal fade" id="modal-error" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      aria-labelledby="staticBackdropLabel" aria-hidden="true" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -136,7 +129,7 @@
             </p>
           </div>
           <div class="modal-footer mt-3">
-            <button id="btn-fechar-modal" variant="secondary" className="w-100 btn-rounded btn btn-secondary">
+            <button id="btn-fechar-modal" class="w-100 btn-rounded btn btn-secondary">
               Fechar
             </button>
           </div>
@@ -151,5 +144,6 @@
 
 <script src="/assets/js/env.js"></script>
 <script src="/assets/js/liveness-2d/liveness-2d.js"></script>
+<script src="/assets/js/facecaptcha/facecaptcha.service.js"></script>
 
 </html>
