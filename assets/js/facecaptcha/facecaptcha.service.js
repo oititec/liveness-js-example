@@ -5,25 +5,23 @@ const facecaptchaService = (function () {
   let initializationMessage = document.getElementById('status');
 
   function disableLivenessCheck() {
-    location.pathname === '/facetec.html' &&
+    location.pathname === '/liveness-3D.html' &&
       livenessCheck.setAttribute('disabled', '');
   }
 
   function disableInitializationMessage(text) {
-    location.pathname === '/facetec.html' &&
+    location.pathname === '/liveness-3D.html' &&
       (initializationMessage.innerHTML = text);
   }
 
   async function getProductionKey(productionKey) {
     const url = `${SERVER_API_URL}/facecaptcha/service/captcha/3d/initialize`;
 
-    const productionKeyParameter = JSON.parse(productionKey);
-
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
     var raw = JSON.stringify({
-      appkey: productionKeyParameter.appkey,
+      appkey: productionKey.appKey,
       platform: 'web',
     });
 
@@ -37,18 +35,9 @@ const facecaptchaService = (function () {
     await fetch(url, requestOptions)
       .then((response) => response.text())
       .then((res) => {
-        env.EncryptedInitializeData = res;
-
         env.ProductionKeyText = JSON.parse(
-          cryptoActions.decChData(
-            JSON.parse(res),
-            productionKeyParameter.appkey
-          )
+          cryptoActions.decChData(JSON.parse(res), productionKey.appKey)
         ).productionKey;
-
-        sampleApp.setAppkey(productionKeyParameter.appkey);
-
-        sampleApp.loadAssets();
       })
       .catch((err) => {
         disableLivenessCheck();
@@ -127,10 +116,89 @@ const facecaptchaService = (function () {
       });
   }
 
+  async function getSessionToken(session) {
+    const url = `${SERVER_API_URL}/facecaptcha/service/captcha/3d/session-token`;
+
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    var raw = JSON.stringify({
+      appkey: session.appkey,
+      userAgent: session.userAgent,
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: headers,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    return await fetch(url, requestOptions)
+      .then((response) => response.text())
+      .then((res) => {
+        return res;
+      })
+      .catch((error) => console.log('error', error));
+  }
+
+  async function sendDocument(parameters) {
+    // const url = `${SERVER_API_URL}/facecaptcha/service/captcha/document`;
+    // const headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    // var raw = JSON.stringify({
+    //   appkey: appkey,
+    //   images: images,
+    // });
+    // var requestOptions = {
+    //   method: 'POST',
+    //   headers: headers,
+    //   body: raw,
+    //   redirect: 'follow',
+    // };
+    // await fetch(url, requestOptions)
+    //   .then((response) => response.text())
+    //   .then((res) => {
+    //     isLoaded = false;
+    //     uploadRequest = false;
+    //     uploadResp = false;
+    //     message = 'Documento enviado com sucesso';
+    //     backSetTypeCapture();
+    //     console.log(res);
+    //     showToastify(message, 'success');
+    //     showHideDivLoader();
+    //     showHideOverlay();
+    //     showHideBgOverlayWhite();
+    //     showHideBtnEnviar();
+    //     overlay.classList.add('d-none');
+    //     thumbsGroup.classList.add('d-none');
+    //     btnTipoCaptura1foto.setAttribute('disabled', '');
+    //     btnTipoCaptura2fotos.setAttribute('disabled', '');
+    //     setTimeout(() => {
+    //       window.location.href = '/facetec.html';
+    //     }, 5000);
+    //   })
+    //   .catch((err) => {
+    //     isLoaded = false;
+    //     message = 'Documento não localizado! Por favor reenvie o documento';
+    //     backSetTypeCapture();
+    //     console.log(err);
+    //     showToastify(message, 'error');
+    //     showHideDivLoader();
+    //     showHideOverlay();
+    //     // showHideRespUpload();
+    //     showHideBtnEnviar();
+    //     overlay.classList.add('d-none');
+    //     thumbsGroup.classList.add('d-none');
+    //   });
+  }
+
   return {
     getProductionKey,
     decryptProductionKey,
     startChallenge,
     captcha,
+    getSessionToken,
+    sendDocument,
   };
 })();
