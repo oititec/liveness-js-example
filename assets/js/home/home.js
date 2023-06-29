@@ -2,8 +2,6 @@ let hasLiveness = window.localStorage.getItem('hasLiveness');
 let lnkHasLiveness = document.getElementById('lnk-has-liveness');
 let sendDocumentsMessage = document.getElementById('send-documents-message');
 
-console.log(hasLiveness);
-
 const initialState = () => {
   if (hasLiveness) {
     lnkHasLiveness.classList.remove('disabled');
