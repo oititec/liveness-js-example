@@ -60,7 +60,7 @@ const sampleApp = (function () {
           //FaceTecSDK.configureLocalization({"localizationJSON": "br"});
 
           // Set localization
-          FaceTecSDK.configureLocalization(FaceTecStringsPtBr);
+          FaceTecSDK.configureLocalization(FaceTecStrings);
         }
         SampleAppUtilities.displayStatus(
           FaceTecSDK.getFriendlyDescriptionForFaceTecSDKStatus(
