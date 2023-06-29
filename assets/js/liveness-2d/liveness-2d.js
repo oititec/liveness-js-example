@@ -96,8 +96,6 @@ const closeLiveness2D = (appkey) => {
   video.srcObject.getTracks()[0].stop();
   video.src = '';
 
-  window.localStorage.setItem('hasLiveness', 'true');
-
   initialState();
 };
 
@@ -304,7 +302,8 @@ const showHideDivButton = () => {
 
 const showHideDivConfirmSuccess = () => {
   livenessSuccess
-    ? liveness2DResult.classList.remove('d-none')
+    ? (liveness2DResult.classList.remove('d-none'),
+      window.localStorage.setItem('hasLiveness', 'true'))
     : liveness2DResult.classList.add('d-none');
 };
 

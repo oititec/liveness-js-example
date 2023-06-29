@@ -82,6 +82,8 @@ var LivenessCheckProcessor = /** @class */ (function () {
               // Na v9.2.0+, basta passar scanResultBlob para a função continueToNextStep para avançar o fluxo do usuário.
               // scanResultBlob é um blob proprietário e criptografado que controla a lógica do que acontece em seguida para o usuário.
               faceScanResultCallback.proceedToNextStep(scanResultBlob);
+
+              window.localStorage.setItem('hasLiveness', 'true');
             } else {
               // CASE: resposta INESPERADA da API. Nosso código de exemplo desliga um booleano wasProcessed na raiz do objeto JSON --> Você define seus próprios contratos de API consigo mesmo e pode optar por fazer algo diferente aqui com base no erro.
               console.log('Resposta inesperada da API. Cancelando.');
