@@ -1,12 +1,5 @@
 const env = (function () {
   let BASE_URL = 'https://comercial.certiface.com.br';
-  let username = 'safra.epf.hml';
-  let password = 'certiface2020';
-  let cliente = {
-    cpf: '38664084807',
-    name: 'Severino Cauã Ribeiro',
-    birthdate: '05/02/1984',
-  };
   let DeviceKeyIdentifier = 'dF2CabwQ6OCLFJaV2QqZhP7OUErHv0uz';
   let PublicFaceScanEncryptionKey =
     '-----BEGIN PUBLIC KEY-----\n' +
@@ -22,9 +15,6 @@ const env = (function () {
 
   return {
     BASE_URL,
-    username,
-    password,
-    cliente,
     DeviceKeyIdentifier,
     PublicFaceScanEncryptionKey,
     ProductionKeyText,
