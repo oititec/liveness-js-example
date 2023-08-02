@@ -1,0 +1,27 @@
+.wrapping-box-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transform: none !important;
+
+  .controls {
+    width: max-content;
+    text-align: center;
+    border: solid 4px #1648cd !important;
+    border-radius: 24px;
+    padding: 24px;
+    width: 550px;
+
+    @media (min-width: 320px) and (max-width: 414px) {
+      width: 95%;
+    }
+
+    img {
+      width: 250px;
+
+      @media (min-width: 320px) and (max-width: 414px) {
+        width: 150px;
+      }
+    }
+  }
+}

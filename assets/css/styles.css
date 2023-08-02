@@ -1,0 +1,394 @@
+.btn.btn-rounded {
+  border-radius: 50px;
+  font-weight: 700;
+}
+.btn.btn-success {
+  background-color: #05D758;
+  border-color: #05D758;
+  color: #1E1E1E;
+}
+.btn.btn-secondary {
+  background-color: #F5F5F5;
+  border-color: #F5F5F5;
+  color: #1E1E1E;
+}
+
+.liveness-2d .overlay {
+  background-color: #000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+.liveness-2d .liveness-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+}
+.liveness-2d .liveness-area .divMsg {
+  position: absolute;
+  top: 20px;
+  margin: 0 46%;
+  background-color: #000;
+  color: #fff;
+  padding: 8px;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+.liveness-2d .liveness-area .divCloseButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.liveness-2d .liveness-area .content-video {
+  text-align: center;
+}
+.liveness-2d .liveness-area .content-video video {
+  height: 100vh;
+}
+.liveness-2d .liveness-area .divButton {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+  text-align: center;
+}
+
+.liveness-2d-result .overlay {
+  background-color: #000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.liveness-2d-result .overlay.success {
+  background-color: #1B7D2C;
+  z-index: 9;
+}
+.liveness-2d-result .result-text {
+  top: 0;
+  left: 0;
+  z-index: 9;
+  color: #fff;
+}
+
+.wrapping-box-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transform: none !important;
+}
+.wrapping-box-container .controls {
+  width: -moz-max-content;
+  width: max-content;
+  text-align: center;
+  border: solid 4px #1648cd !important;
+  border-radius: 24px;
+  padding: 24px;
+  width: 550px;
+}
+@media (min-width: 320px) and (max-width: 414px) {
+  .wrapping-box-container .controls {
+    width: 95%;
+  }
+}
+.wrapping-box-container .controls img {
+  width: 250px;
+}
+@media (min-width: 320px) and (max-width: 414px) {
+  .wrapping-box-container .controls img {
+    width: 150px;
+  }
+}
+
+.btnControllers {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 50px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.wrapping-box-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transform: none !important;
+}
+.wrapping-box-container .control {
+  border: none !important;
+}
+.wrapping-box-container .control img {
+  width: 250px;
+}
+@media (min-width: 320px) and (max-width: 414px) {
+  .wrapping-box-container .control img {
+    width: 150px;
+  }
+}
+.wrapping-box-container .control.inner {
+  min-height: 300px;
+}
+.wrapping-box-container .control.inner .bgOverlay {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  opacity: 0.8;
+}
+.wrapping-box-container .control.inner .bgOverlay.white-bg {
+  background: #000;
+}
+.wrapping-box-container .control.inner .btnBackContainer {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 10;
+  text-align: center;
+}
+.wrapping-box-container .control.inner #content-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapping-box-container .control.inner .contentDesktop .containerVideo {
+  height: 480px;
+  overflow: hidden;
+}
+.wrapping-box-container .control.inner .containerVideo {
+  width: 320px;
+  margin: 0 auto;
+  position: relative;
+  height: auto;
+  overflow: hidden;
+}
+.wrapping-box-container .control.inner .containerVideo video {
+  height: 480px;
+  margin-left: -50%;
+}
+.wrapping-box-container .control.inner .containerVideo .progress {
+  margin: 0 10px;
+}
+.wrapping-box-container .control.inner #divMsg {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  z-index: 2;
+  color: #fff;
+  text-shadow: 0 3px 6px -1px rgb(0, 0, 0);
+}
+.wrapping-box-container .control.inner .overlay {
+  border: solid 2px #5CB85C;
+  width: 320px;
+  height: 480px;
+  position: absolute;
+  top: auto;
+  left: auto;
+  z-index: 1;
+}
+.wrapping-box-container .control.inner #divLoader {
+  z-index: 99;
+  top: 45%;
+  width: 100%;
+  position: absolute;
+  color: #fff;
+}
+.wrapping-box-container .control.inner .thumbPicture {
+  width: 320px;
+  height: 480px;
+  position: absolute;
+  top: 0;
+}
+.wrapping-box-container .control.inner .thumbPicture img {
+  width: 320px;
+  height: 480px;
+  margin: 0 auto;
+}
+.wrapping-box-container .control.inner .thumbsGroup {
+  width: 90%;
+  display: block;
+  position: relative;
+  height: 480px;
+  z-index: 10;
+  bottom: 0;
+  padding: 0;
+  margin: 0 auto;
+}
+.wrapping-box-container .control.inner .thumbGroupCard {
+  margin: 2px;
+  width: 100%;
+  display: inline-block;
+  position: relative;
+}
+.wrapping-box-container .control.inner .thumbGroupCard:first-child {
+  left: 0;
+}
+.wrapping-box-container .control.inner .thumbGroupCard:last-child {
+  right: 0;
+}
+.wrapping-box-container .control.inner .thumbGroupCard img {
+  display: block;
+  margin: 0 auto;
+  width: 130px;
+}
+.wrapping-box-container .control.inner .thumbGroupCard button.badge .material-icons {
+  font-size: 15px;
+}
+.wrapping-box-container .control.liveness-control {
+  text-align: center;
+  height: 100%;
+  width: 370px;
+  display: inline-block;
+}
+.wrapping-box-container .control.liveness-control .outer {
+  position: relative;
+  width: 100%;
+}
+.wrapping-box-container .control.liveness-control .outer.r4x3 {
+  padding-top: 480px;
+}
+.wrapping-box-container .control.liveness-control .outer .inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.wrapping-box-container .control.liveness-control .outer .inner #divPowered {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 150px;
+  z-index: 7;
+}
+.wrapping-box-container .control.liveness-control .outer .inner #divPowered span {
+  font-size: 12px;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+}
+.wrapping-box-container .control.liveness-control .outer .inner .overlay {
+  background-image: url("/assets/img/desktop_layer-2.1.svg") !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+  width: 316px;
+  height: 476px;
+  position: absolute;
+  top: auto;
+  left: auto;
+  z-index: 6;
+  opacity: 0.5;
+  border-radius: 10px;
+}
+.wrapping-box-container .control.liveness-control .outer .inner #content-video {
+  background-color: white;
+  width: 310px;
+  height: 465px;
+  display: block;
+  overflow: hidden;
+  border-radius: 10px;
+  position: absolute;
+  top: 6px;
+  left: 3px;
+}
+.wrapping-box-container .control.liveness-control .outer .inner #content-video video {
+  height: 100%;
+  transform: rotateY(180deg);
+  margin-left: -50%;
+}
+.wrapping-box-container .control.liveness-control .outer .inner #divMsg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 30px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+  width: 80%;
+  z-index: 6;
+}
+.wrapping-box-container .control.liveness-control .outer .inner #divSorriso {
+  position: absolute;
+  top: 65%;
+  left: 70px;
+  width: 58%;
+  z-index: 6;
+}
+.wrapping-box-container .control.liveness-control .outer .inner #divSorriso img {
+  width: 30%;
+}
+.wrapping-box-container .control.liveness-control .outer .inner #divButton {
+  bottom: 18px;
+  position: absolute;
+  width: 100%;
+  z-index: 6;
+}
+.wrapping-box-container .control.liveness-control .outer .inner #divButton .rect {
+  width: 40%;
+  height: 50px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 25px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  letter-spacing: -0.065em;
+  font-family: "Hammersmith One", sans-serif;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  z-index: 1;
+  border-width: 4px;
+  border-style: solid;
+}
+.wrapping-box-container .control.liveness-control .outer .inner #divButton .rect.green {
+  background-color: rgb(176, 216, 59);
+  color: rgb(73, 83, 92);
+  border-color: rgba(0, 63, 71, 0.2);
+}
+
+.modal-backdrop.show {
+  opacity: 0.8 !important;
+}
+
+.modal.show .modal-dialog .modal-content {
+  border-radius: 24px;
+  padding: 40px;
+}
+.modal.show .modal-dialog .modal-content .modal-header {
+  border-bottom: 0;
+  padding: 0;
+}
+.modal.show .modal-dialog .modal-content .modal-header .modal-title, .modal.show .modal-dialog .modal-content .modal-header .btn-close {
+  display: none;
+}
+.modal.show .modal-dialog .modal-content .modal-body {
+  padding: 0;
+}
+.modal.show .modal-dialog .modal-content .modal-body p {
+  font-weight: 700;
+}
+.modal.show .modal-dialog .modal-content .modal-footer {
+  border-top: 0;
+  padding: 0;
+}
+
+@media (min-width: 576px) {
+  .modal-sm {
+    --bs-modal-width: 446px;
+  }
+}/*# sourceMappingURL=styles.css.map */
