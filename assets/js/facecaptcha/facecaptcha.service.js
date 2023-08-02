@@ -142,7 +142,7 @@ const facecaptchaService = (function () {
       .catch((error) => console.log('error', error));
   }
 
-  async function sendDocument(parameters) {
+  async function sendDocument(appkey, images) {
     const url = `${SERVER_API_URL}/facecaptcha/service/captcha/document`;
 
     const headers = new Headers();

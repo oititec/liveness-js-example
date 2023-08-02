@@ -21,7 +21,7 @@ let uploadRequest = false;
 let uploadResp = true;
 let countLoader = 0;
 
-let btnVoltar = document.getElementById('btn-back-to-facetec');
+let sendDocumentArea = document.getElementById('send-document-area');
 let bgOverlay = document.getElementById('bg-overlay');
 let bgOverlayWhite = document.getElementById('bg-overlay-white');
 let cameraRotate = document.getElementById('camera-rotate');
@@ -48,18 +48,18 @@ let divButton = document.getElementById('divButton');
 let btnIniciar = document.getElementById('btnIniciar');
 let btnEnviar = document.getElementById('btnEnviar');
 let loaderProgressBar = document.getElementById('loader-progress-bar');
+let btnDeleteAppKey = document.getElementById('btn-delete-app-key');
 
 const initEvents = (event) => {
   event.preventDefault();
 
   showDesktop = !isMobile();
 
-  !appkey && (window.location.href = '/');
-
+  showHideSendDocumentArea();
+  showHideBgOverlay();
   showHideBgOverlay();
   showHideCameraRotation();
   showHideBackContainerContent();
-  showHideTypeCapture();
   showHideContentVideo();
   showHideDivLoader();
   showHideOverlay();
@@ -67,6 +67,11 @@ const initEvents = (event) => {
   showHideThumbPicture();
   fillImageCamera('');
   showHideThumbsGroup();
+
+  if (!appkey) {
+    btnTipoCaptura1foto.classList.add('disabled');
+    btnTipoCaptura2fotos.classList.add('disabled');
+  }
 };
 
 window.addEventListener('load', initEvents);
@@ -80,7 +85,7 @@ const onResize = (event) => {
       message = '';
 
       showHideThumbsGroup();
-      message = 'warning';
+      showToastify(message, 'warning');
       showHideDivButton();
 
       if (!btnControllers && !showUpload) {
@@ -94,7 +99,7 @@ const onResize = (event) => {
       isLoaded = false;
 
       showHideCameraRotation();
-      message = 'warning';
+      showToastify(message, 'warning');
       showHideDivLoader();
       showHideOverlay();
       showHideThumbsGroup();
@@ -177,6 +182,7 @@ const onResize = (event) => {
   }
 };
 
+// Volta para tela de seleção da quantidade de fotos à capturar
 const backSetTypeCapture = () => {
   uploadRequest = false;
   btnControllers = false;
@@ -199,7 +205,7 @@ const backSetTypeCapture = () => {
   showHideContentVideo();
   showHideVideoPlayer();
   showHideBackContainerContent();
-  showHideTypeCapture();
+  showHideSendDocumentArea();
   showHideBgOverlay();
   showHideBgOverlayWhite();
   // showHideRespUpload();
@@ -211,29 +217,31 @@ const backSetTypeCapture = () => {
   thumbGroupCard.innerHTML = '';
 };
 
+// Seleciona a quantidade de fotos que vai capturar
 const setTypeCapture = (type) => {
   if (type === 1) {
     multiCapture = false;
     showTypeCapture = false;
 
     onResize();
+    showHideSendDocumentArea();
     showHideBgOverlay();
     showHideContentVideo();
-    showHideTypeCapture();
     fillLoader(countLoader);
   } else {
     multiCapture = true;
     showTypeCapture = false;
 
     onResize();
+    showHideSendDocumentArea();
     showHideBgOverlay();
     showHideContentVideo();
-    showHideTypeCapture();
     showHideThumbsGroup();
     fillLoader(countLoader);
   }
 };
 
+// Abertura da câmera
 const startCamera = () => {
   if (multiCapture) {
     if (indexTempSnap !== -1) {
@@ -251,7 +259,7 @@ const startCamera = () => {
     message = 'Centralize o documento';
   }
 
-  message = 'warning';
+  showToastify(message, 'warning');
 
   showIniciar = false;
   isLoaded = true;
@@ -324,6 +332,7 @@ const handleStream = (stream) => {
   streams = stream.getVideoTracks();
 };
 
+// Fecha a câmera
 const stopCameraStreams = () => {
   if (streams) {
     streams.forEach((stream) => {
@@ -344,7 +353,7 @@ const startCapture = async () => {
 
   stopCameraStreams();
   showHideBackContainerContent();
-  message = 'warning';
+  showToastify(message, 'warning');
   showHideDivLoader();
   showHideOverlay();
   showHideBtnIniciar();
@@ -365,6 +374,7 @@ const startCapture = async () => {
   }, 2500);
 };
 
+// Limpa as listar e reinicia a Câmera
 const resetSnap = () => {
   snapTempDOM = '';
   btnControllers = false;
@@ -413,6 +423,7 @@ const resetSnap = () => {
   }
 };
 
+// captura imagem para validação do usuário
 const snapCapture = () => {
   snapTempDOM = snap();
 
@@ -420,6 +431,7 @@ const snapCapture = () => {
   fillImageCamera(snapTempDOM);
 };
 
+// prepara captura de imagem
 const snapTick = () => {
   // Adiciona as fotos nas listas
   if (indexTempSnap !== -1) {
@@ -434,6 +446,7 @@ const snapTick = () => {
   resetSnap();
 };
 
+// captura imagem da câmera
 const snap = () => {
   const canvas = document.getElementById('fc_canvas');
   const ctx = canvas.getContext('2d');
@@ -488,6 +501,7 @@ const snap = () => {
   return img.src;
 };
 
+// remove imagem das listas
 const removeSnapFromLists = (index) => {
   indexTempSnap = index;
   snapsCaptures.splice(index, 1);
@@ -500,11 +514,12 @@ const removeSnapFromLists = (index) => {
   showHideThumbsGroup();
 };
 
+// Envia as fotos e finaliza o upload de imagens
 const uploadPictures = () => {
   isLoaded = true;
   message = 'Enviando';
 
-  message = 'warning';
+  showToastify(message, 'warning');
   showHideDivLoader();
   showHideOverlay();
   showHideBtnEnviar();
@@ -520,6 +535,12 @@ const isMobile = () => {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent
   );
+};
+
+const showHideSendDocumentArea = () => {
+  !showTypeCapture && !showUpload
+    ? sendDocumentArea.classList.remove('d-none')
+    : sendDocumentArea.classList.add('d-none');
 };
 
 const showHideBgOverlay = () => {
@@ -544,12 +565,6 @@ const showHideBackContainerContent = () => {
   !showTypeCapture && !processing
     ? backContainer.classList.remove('d-none')
     : backContainer.classList.add('d-none');
-};
-
-const showHideTypeCapture = () => {
-  showTypeCapture
-    ? captureTypeBox.classList.remove('d-none')
-    : captureTypeBox.classList.add('d-none');
 };
 
 const showHideContentVideo = () => {
@@ -679,35 +694,89 @@ const fetchSnapCaptures = (snap) => {
   thumbGroupCard.innerHTML = snapContent;
 };
 
+// Envia Documentos
 const sendDocument = async (appkey, images) => {
-  const snapsSend = snapsCaptures.map((snap) =>
-    snap.replace('data:image/jpeg;base64,', '')
-  );
+  const url = `${SERVER_API_URL}/facecaptcha/service/captcha/document`;
 
-  const parameters = {
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+
+  var raw = JSON.stringify({
     appkey: appkey,
-    images: snapsSend,
+    images: images,
+  });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: headers,
+    body: raw,
+    redirect: 'follow',
   };
 
-  try {
-    const result = await facecaptchaService.sendDocument(parameters);
-
-    console.log('consolando', result);
-
-    setTimeout(() => {
+  await fetch(url, requestOptions)
+    .then((response) => response.text())
+    .then((res) => {
       isLoaded = false;
-      uploadRequest = true;
+      uploadRequest = false;
       uploadResp = false;
-    }, 1000);
+      message = 'Documento enviado com sucesso';
 
-    window.alert('Documento enviado com sucesso');
-  } catch (error) {
-    setTimeout(() => {
+      backSetTypeCapture();
+
+      console.log(res);
+
+      showToastify(message, 'success');
+      showHideDivLoader();
+      showHideOverlay();
+      showHideBgOverlayWhite();
+      showHideBtnEnviar();
+      removeAppKeyFromLocalStorage();
+
+      overlay.classList.add('d-none');
+      thumbsGroup.classList.add('d-none');
+
+      btnTipoCaptura1foto.classList.add('disabled');
+      btnTipoCaptura2fotos.classList.add('disabled');
+    })
+    .catch((err) => {
       isLoaded = false;
+      message = 'Documento não localizado! Por favor reenvie o documento';
 
-      window.alert('Documento não localizado! Por favor reenvie o documento.');
-    }, 1000);
-  }
+      backSetTypeCapture();
+
+      console.log(err);
+
+      showToastify(message, 'error');
+      showHideDivLoader();
+      showHideOverlay();
+      // showHideRespUpload();
+      showHideBtnEnviar();
+
+      overlay.classList.add('d-none');
+      thumbsGroup.classList.add('d-none');
+    });
+};
+
+const removeAppKeyFromLocalStorage = () => {
+  window.localStorage.removeItem('appkey');
+  window.localStorage.removeItem('hasLiveness');
+};
+
+const showToastify = (message, typeMessage) => {
+  Toastify({
+    text: message,
+    className: typeMessage,
+    duration: 5000,
+    close: true,
+    gravity: 'top',
+    position: 'right',
+    stopOnFocus: true,
+    ariaLive: 'polite',
+  }).showToast();
+
+  let toastifyElementButton = document.getElementsByClassName('toast-close')[0];
+
+  toastifyElementButton.setAttribute('aria-label', 'Fechar');
 };
 
 const deleteAppKey = () => {
@@ -717,7 +786,6 @@ const deleteAppKey = () => {
   window.location.href = '/';
 };
 
-btnVoltar.addEventListener('click', () => voltar());
 btnVoltarTipoCaptura.addEventListener('click', () => backSetTypeCapture());
 btnTipoCaptura1foto.addEventListener('click', () => setTypeCapture(1));
 btnTipoCaptura2fotos.addEventListener('click', () => setTypeCapture(2));
@@ -725,3 +793,4 @@ snapTickButton.addEventListener('click', () => snapTick());
 resetSnapButton.addEventListener('click', () => resetSnap());
 btnIniciar.addEventListener('click', () => startCapture());
 btnEnviar.addEventListener('click', () => uploadPictures());
+btnDeleteAppKey.addEventListener('click', () => deleteAppKey());

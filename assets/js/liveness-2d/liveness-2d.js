@@ -53,6 +53,10 @@ const initialState = () => {
   showHideDivConfirmSuccess();
   showImgMsg();
   showImgChallenge();
+
+  if (!appkey) {
+    btnShowLiveness2d.classList.add('disabled');
+  }
 };
 
 const showLiveness2D = () => {
