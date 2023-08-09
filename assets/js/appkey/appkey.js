@@ -38,7 +38,7 @@ window.onload = () => {
         window.localStorage.setItem('appkey', appkey);
 
         setTimeout(() => {
-          window.location.href = '/home';
+          window.location.href = '/home/index.html';
         }, 1000);
       })
       .catch(() => {

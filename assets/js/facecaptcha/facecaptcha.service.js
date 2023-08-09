@@ -5,12 +5,12 @@ const facecaptchaService = (function () {
   let initializationMessage = document.getElementById('status');
 
   function disableLivenessCheck() {
-    location.pathname === '/liveness-3D.html' &&
+    location.pathname === '/liveness-3D.html/index.html' &&
       livenessCheck.setAttribute('disabled', '');
   }
 
   function disableInitializationMessage(text) {
-    location.pathname === '/liveness-3D.html' &&
+    location.pathname === '/liveness-3D.html/index.html' &&
       (initializationMessage.innerHTML = text);
   }
 
