@@ -230,7 +230,12 @@ export declare enum FaceTecIDScanStatus {
     /**
      ID Scan was cancelled because device is in landscape mode.
     */
-    LandscapeModeNotAllowed = 8
+    LandscapeModeNotAllowed = 8,
+    /**
+    * ID Scan cancelled because of an unknown and unexpected error.  The FaceTec Browser SDK leverages a variety of platform APIs including camera, storage, security, networking, and more.
+    * This return value is a catch-all for errors experienced during normal usage of these APIs.
+    */
+    UnknownInternalError = 9
 }
 /** ID Scan Result object */
 export interface FaceTecIDScanResult {
