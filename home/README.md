@@ -2,7 +2,7 @@
 
 Atualmente o projeto possui a seguinte árvore de arquivos:
 <br>
-![image.png](https://i.ibb.co/kgDTjBR/Captura-de-tela-de-2023-04-20-17-16-45.png)
+![image.png](https://i.ibb.co/c8bkfpv/image.png)
 
 Atenção: A alteração da estrutura de arquivos do projeto poderá acarretar no não funcionamento do projeto.
 
