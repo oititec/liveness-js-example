@@ -1,4 +1,4 @@
-![image.png](https://github.com/oititec/liveness-angular-example/blob/main/assets/img/OitiHeader.png)
+![image.png](https://github.com/oititec/liveness-js-example/blob/main/assets/img/OitiHeader.png)
 
 # CertiFace para Vanilla JavaScript
 
