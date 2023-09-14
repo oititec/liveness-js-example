@@ -1,6 +1,6 @@
 ![image.png](https://github.com/oititec/liveness-js-example/blob/main/assets/img/OitiHeader.png)
 
-# CertiFace para Vanilla JavaScript
+# CertiFace para JavaScript
 
 Este repositório contém o processo de liveness em 2D, 3D, envio de documentos e guia rápido de atualização.
 
@@ -17,7 +17,18 @@ Para visualizar a documentação de cada módulo, utilize os links abaixo:
 
 - [Guia rápido de atualização](https://github.com/oititec/liveness-js-example/blob/main/update-guide/README.md)
 
-### FaceTec SDK: 9.6.42
+### [FaceTec SDK: 9.6.47](https://github.com/oititec/liveness-angular-example/blob/main/assets/js/9.6.47)
+
+_data: 14/09/2023_
+
+- Added New Device-side and Server-side Video Injection Checks to mitigate Generative AI Threats.
+- Performance improvements on low-tier and mid-tier devices leading to Success Rate Improvements.
+- Fixes for multiple issues affecting usability when integrated into a iFrame-based Applications.
+- Various stability improvement fixes.
+- Improvements to Blind User Assistance Mode.
+- ID Scanning - The size in MB of the Back IDScan has been greatly reduced (50% or more in many cases).
+
+### [FaceTec SDK: 9.6.42](https://github.com/oititec/liveness-angular-example/blob/main/assets/js/9.6.42)
 
 _data: 10/08/2023_
 

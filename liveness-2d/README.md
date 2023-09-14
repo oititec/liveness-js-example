@@ -1,4 +1,4 @@
-# Este documento trata com detalhes a implementação em Vanilla JavaScript relacionado ao Liveness 2D.
+# Este documento trata com detalhes a implementação em JavaScript relacionado ao Liveness 2D.
 
 ## 1 - Informações da home
 
