@@ -1,4 +1,4 @@
-# Este documento trata com detalhes a implementação do SDK da FaceTec no exemplo em Vanilla JavaScript relacionado ao Liveness 3D.
+# Este documento trata com detalhes a implementação do SDK da FaceTec no exemplo em JavaScript relacionado ao Liveness 3D.
 
 ## 1 - Informações da home
 

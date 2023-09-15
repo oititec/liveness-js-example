@@ -1,4 +1,4 @@
-# Este documento trata com detalhes a implementação do SDK da FaceTec no exemplo em Vanilla JavaScript relacionado ao Envio de Documentos.
+# Este documento trata com detalhes a implementação do SDK da FaceTec no exemplo em JavaScript relacionado ao Envio de Documentos.
 
 ## 1 - Informações da home
 
