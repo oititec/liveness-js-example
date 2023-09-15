@@ -137,7 +137,9 @@ const facecaptchaService = (function () {
     return await fetch(url, requestOptions)
       .then((response) => response.text())
       .then((res) => {
-        return res;
+        return JSON.parse(
+          cryptoActions.decChData(JSON.parse(res), session.appkey)
+        ).sessionToken;
       })
       .catch((error) => console.log('error', error));
   }
