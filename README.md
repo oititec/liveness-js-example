@@ -17,6 +17,17 @@ Para visualizar a documentação de cada módulo, utilize os links abaixo:
 
 - [Guia rápido de atualização](https://github.com/oititec/liveness-js-example/blob/main/update-guide/README.md)
 
+### [FaceTec SDK: 9.6.480](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.6.48)
+
+_data: 19/09/2023_
+
+- Added New Device-side and Server-side Video Injection Checks to mitigate Generative AI Threats.
+- Performance improvements on low-tier and mid-tier devices leading to Success Rate Improvements.
+- Fixes for multiple issues affecting usability when integrated into a iFrame-based Applications.
+- Various stability improvement fixes.
+- Improvements to Blind User Assistance Mode.
+- ID Scanning - The size in MB of the Back IDScan has been greatly reduced (50% or more in many cases).
+
 ### [FaceTec SDK: 9.6.47](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.6.47)
 
 _data: 14/09/2023_
