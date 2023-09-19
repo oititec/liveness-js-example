@@ -17,7 +17,7 @@ Para visualizar a documentação de cada módulo, utilize os links abaixo:
 
 - [Guia rápido de atualização](https://github.com/oititec/liveness-js-example/blob/main/update-guide/README.md)
 
-### [FaceTec SDK: 9.6.480](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.6.48)
+### [FaceTec SDK: 9.6.48](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.6.48)
 
 _data: 19/09/2023_
 
