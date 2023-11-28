@@ -17,6 +17,18 @@ Para visualizar a documentação de cada módulo, utilize os links abaixo:
 
 - [Guia rápido de atualização](https://github.com/oititec/liveness-js-example/blob/main/update-guide/README.md)
 
+### [FaceTec SDK: 9.6.58](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.6.58)
+
+_data: 28/11/2023_
+
+- Generic Feedback Updated.
+- Numerous UI/UX Polish Fixes.
+- Improved Logging in Error Cases.
+- Numerous Compatibility, Stability, and Performance Fixes.
+- Minor improvements to Low Light and Auto-Dimming Modes.
+- Added New Device-side and Server-side Video Injection Checks to mitigate Generative AI Threats.
+- Performance improvements on low-tier and mid-tier devices leading to Success Rate Improvements.
+
 ### [FaceTec SDK: 9.6.53](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.6.53)
 
 _data: 24/10/2023_
