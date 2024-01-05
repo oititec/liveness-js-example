@@ -1,7 +1,7 @@
-let SERVER_API_URL = env.BASE_URL;
-
 let streams = '';
 let appkey = window.localStorage.getItem('appkey');
+let apiType = window.localStorage.getItem('apiType');
+let ticket = window.localStorage.getItem('ticket');
 
 let snapsCaptures = [];
 let snapTempDOM = '';
@@ -528,7 +528,11 @@ const uploadPictures = () => {
     snap.replace('data:image/jpeg;base64,', '')
   );
 
-  sendDocument(appkey, snapsSend);
+  if (apiType === 'flexible-api') {
+    sendCertifaceData(appkey, ticket, snapsSend);
+  } else {
+    sendDocument(appkey, snapsSend);
+  }
 };
 
 const isMobile = () => {
@@ -694,66 +698,74 @@ const fetchSnapCaptures = (snap) => {
   thumbGroupCard.innerHTML = snapContent;
 };
 
+const uploadResponse = (res) => {
+  isLoaded = false;
+  uploadRequest = false;
+  uploadResp = false;
+  message = 'Documento enviado com sucesso';
+
+  backSetTypeCapture();
+
+  console.log(res);
+
+  showToastify(message, 'success');
+  showHideDivLoader();
+  showHideOverlay();
+  showHideBgOverlayWhite();
+  showHideBtnEnviar();
+  removeAppKeyFromLocalStorage();
+
+  overlay.classList.add('d-none');
+  thumbsGroup.classList.add('d-none');
+
+  btnTipoCaptura1foto.classList.add('disabled');
+  btnTipoCaptura2fotos.classList.add('disabled');
+};
+
+const uploadError = (err) => {
+  isLoaded = false;
+  message = 'Documento não localizado! Por favor reenvie o documento';
+
+  backSetTypeCapture();
+
+  console.log(err);
+
+  showToastify(message, 'error');
+  showHideDivLoader();
+  showHideOverlay();
+  // showHideRespUpload();
+  showHideBtnEnviar();
+
+  overlay.classList.add('d-none');
+  thumbsGroup.classList.add('d-none');
+};
+
 // Envia Documentos
 const sendDocument = async (appkey, images) => {
-  const url = `${SERVER_API_URL}/facecaptcha/service/captcha/document`;
-
-  const headers = new Headers();
-  headers.append('Content-Type', 'application/json');
-
-  var raw = JSON.stringify({
-    appkey: appkey,
-    images: images,
-  });
-
-  var requestOptions = {
-    method: 'POST',
-    headers: headers,
-    body: raw,
-    redirect: 'follow',
-  };
-
-  await fetch(url, requestOptions)
-    .then((response) => response.text())
+  await facecaptchaService
+    .sendDocument(appkey, images)
+    .then((response) => {
+      console.log(response);
+    })
     .then((res) => {
-      isLoaded = false;
-      uploadRequest = false;
-      uploadResp = false;
-      message = 'Documento enviado com sucesso';
-
-      backSetTypeCapture();
-
-      console.log(res);
-
-      showToastify(message, 'success');
-      showHideDivLoader();
-      showHideOverlay();
-      showHideBgOverlayWhite();
-      showHideBtnEnviar();
-      removeAppKeyFromLocalStorage();
-
-      overlay.classList.add('d-none');
-      thumbsGroup.classList.add('d-none');
-
-      btnTipoCaptura1foto.classList.add('disabled');
-      btnTipoCaptura2fotos.classList.add('disabled');
+      uploadResponse(res);
     })
     .catch((err) => {
-      isLoaded = false;
-      message = 'Documento não localizado! Por favor reenvie o documento';
+      uploadError(err);
+    });
+};
 
-      backSetTypeCapture();
-
-      console.log(err);
-
-      showToastify(message, 'error');
-      showHideDivLoader();
-      showHideOverlay();
-      // showHideRespUpload();
-      showHideBtnEnviar();
-
-      overlay.classList.add('d-none');
-      thumbsGroup.classList.add('d-none');
+const sendCertifaceData = async (appkey, ticket, documentImages) => {
+  await facecaptchaService
+    .sendCertifaceData(ticket, appkey, documentImages)
+    .then((response) => {
+      console.log(response);
+    })
+    .then((res) => {
+      uploadResponse(res);
+    })
+    .catch((err) => {
+      uploadError(err);
     });
 };
 
