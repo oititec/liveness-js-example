@@ -31,35 +31,62 @@ window.onload = () => {
     let appkey = txtAppkey.value;
     let ticket = txtTicket.value;
 
-    // O código abaixo é apenas um exemplo para validar se o ticket é válido e está ativo.
-    // Não deve ser implementado no front de maneira alguma.
-    let url = `${env.BASE_URL_FLEXIBLE_API}/bff-demo/result/${ticket}`;
-
-    const headers = new Headers();
-    headers.append('x-sub-org', '1');
-    headers.append('x-group', '1');
-    headers.append('x-branch', '1');
+    let url = `${env.BASE_URL}/facecaptcha/service/captcha/checkauth?appkey=${appkey}`;
 
     let requestOptions = {
       method: 'GET',
-      headers: headers,
-      redirect: 'follow',
     };
 
     await fetch(url, requestOptions)
       .then((response) => response.text())
-      .then(() => {
-        initialState();
+      .then((res) => {
+        // O código abaixo é apenas um exemplo para validar se o ticket é válido e está ativo.
+        // Não deve ser implementado no front de maneira alguma.
+        let url = `${env.BASE_URL_FLEXIBLE_API}/bff-demo/result/${
+          ticket !== '' ? ticket : 'undefined'
+        }`;
 
-        window.localStorage.setItem('appkey', appkey);
-        window.localStorage.setItem('ticket', ticket);
+        const headers = new Headers();
 
-        setTimeout(() => {
-          window.location.href = '/nav-menu/index.html';
-        }, 1000);
+        headers.append('x-sub-org', '1');
+        headers.append('x-group', '1');
+        headers.append('x-branch', '1');
+
+        let requestOptions = {
+          method: 'GET',
+          headers: headers,
+        };
+
+        fetch(url, requestOptions)
+          .then((response) => response.text())
+          .then((res) => {
+            let parseRes = JSON.parse(res);
+
+            if (parseRes.statusCode === 500) {
+              initialState();
+
+              errorMessage.innerHTML = JSON.stringify(parseRes.message);
+            } else {
+              initialState();
+
+              window.localStorage.setItem('appkey', appkey);
+              window.localStorage.setItem('ticket', ticket);
+
+              setTimeout(() => {
+                window.location.href = '/nav-menu/index.html';
+              }, 1000);
+            }
+          })
+          .catch((err) => {
+            initialState();
+
+            console.log('erro:', err);
+          });
       })
-      .catch(() => {
+      .catch((err) => {
         initialState();
+
+        console.log('erro:', err);
 
         errorMessage.innerHTML = 'Não autorizado';
       });

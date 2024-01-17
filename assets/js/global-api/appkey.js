@@ -43,8 +43,10 @@ window.onload = () => {
           window.location.href = '/nav-menu/index.html';
         }, 1000);
       })
-      .catch(() => {
+      .catch((err) => {
         initialState();
+
+        console.log('erro:', err);
 
         errorMessage.innerHTML = 'Não autorizado';
       });
