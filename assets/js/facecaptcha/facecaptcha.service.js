@@ -168,7 +168,9 @@ const facecaptchaService = (function () {
       .then((res) => {
         return res;
       })
-      .catch((error) => console.log('error', error));
+      .catch((error) => {
+        return error;
+      });
   }
 
   async function sendCertifaceData(ticket, appkey, documentImages) {
@@ -200,7 +202,9 @@ const facecaptchaService = (function () {
       .then((res) => {
         return res;
       })
-      .catch((error) => console.log('error', error));
+      .catch((error) => {
+        return error;
+      });
   }
 
   return {

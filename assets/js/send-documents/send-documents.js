@@ -742,31 +742,27 @@ const uploadError = (err) => {
 
 // Envia Documentos
 const sendDocument = async (appkey, images) => {
-  await facecaptchaService
-    .sendDocument(appkey, images)
-    .then((response) => {
-      console.log(response);
-    })
-    .then((res) => {
-      uploadResponse(res);
-    })
-    .catch((err) => {
-      uploadError(err);
-    });
+  const result = await facecaptchaService.sendDocument(appkey, images);
+
+  if (typeof result !== 'object') {
+    uploadResponse(result);
+  } else {
+    uploadError(result);
+  }
 };
 
 const sendCertifaceData = async (appkey, ticket, documentImages) => {
-  await facecaptchaService
-    .sendCertifaceData(ticket, appkey, documentImages)
-    .then((response) => {
-      console.log(response);
-    })
-    .then((res) => {
-      uploadResponse(res);
-    })
-    .catch((err) => {
-      uploadError(err);
-    });
+  const result = await facecaptchaService.sendCertifaceData(
+    ticket,
+    appkey,
+    documentImages
+  );
+
+  if (typeof result !== 'object') {
+    uploadResponse(result);
+  } else {
+    uploadError(result);
+  }
 };
 
 const removeAppKeyFromLocalStorage = () => {
