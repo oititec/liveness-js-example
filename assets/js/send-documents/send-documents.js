@@ -295,9 +295,12 @@ const startCamera = () => {
   const constraints = {
     audio: false,
     video: {
-      facingMode: 'environment',
+      facingMode: 'right',
       width: { exact: 640 },
       height: { exact: 480 },
+      aspectRatio: { ideal: 1 },
+      focusMode: 'manual',
+      focusDistance: 0.33,
     },
   };
 
@@ -307,6 +310,9 @@ const startCamera = () => {
       width: { exact: 1280 },
       height: { exact: 720 },
       facingMode: 'environment',
+      aspectRatio: { ideal: 1 },
+      focusMode: 'manual',
+      focusDistance: 0.33,
     };
   }
 
