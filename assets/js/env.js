@@ -1,5 +1,6 @@
 const env = (function () {
   let BASE_URL = 'https://comercial.certiface.com.br';
+  let BASE_URL_FLEXIBLE_API = 'https://api.hml.certiface.io';
   let DeviceKeyIdentifier = 'dF2CabwQ6OCLFJaV2QqZhP7OUErHv0uz';
   let PublicFaceScanEncryptionKey =
     '-----BEGIN PUBLIC KEY-----\n' +
@@ -15,6 +16,7 @@ const env = (function () {
 
   return {
     BASE_URL,
+    BASE_URL_FLEXIBLE_API,
     DeviceKeyIdentifier,
     PublicFaceScanEncryptionKey,
     ProductionKeyText,

@@ -21,6 +21,8 @@ window.onload = () => {
   initialState();
   removeAppKeyValue();
 
+  window.localStorage.setItem('apiType', 'global-api');
+
   btnContinuar.addEventListener('click', async () => {
     setAppKeyValue();
 
@@ -38,11 +40,13 @@ window.onload = () => {
         window.localStorage.setItem('appkey', appkey);
 
         setTimeout(() => {
-          window.location.href = '/home/index.html';
+          window.location.href = '/nav-menu/index.html';
         }, 1000);
       })
-      .catch(() => {
+      .catch((err) => {
         initialState();
+
+        console.log('erro:', err);
 
         errorMessage.innerHTML = 'Não autorizado';
       });

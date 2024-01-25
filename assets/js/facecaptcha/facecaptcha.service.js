@@ -1,4 +1,5 @@
 const SERVER_API_URL = env.BASE_URL;
+const SERVER_API_URL_FLEXIBLE_API = env.BASE_URL_FLEXIBLE_API;
 
 const facecaptchaService = (function () {
   let livenessCheck = document.getElementById('liveness-button');
@@ -32,17 +33,17 @@ const facecaptchaService = (function () {
       redirect: 'follow',
     };
 
-    await fetch(url, requestOptions)
+    return await fetch(url, requestOptions)
       .then((response) => response.text())
       .then((res) => {
-        env.ProductionKeyText = JSON.parse(
-          cryptoActions.decChData(JSON.parse(res), productionKey.appKey)
-        ).productionKey;
+        return res;
       })
       .catch((err) => {
         disableLivenessCheck();
 
         disableInitializationMessage(err);
+
+        return err;
       });
   }
 
@@ -167,15 +168,54 @@ const facecaptchaService = (function () {
       .then((res) => {
         return res;
       })
-      .catch((error) => console.log('error', error));
+      .catch((error) => {
+        return error;
+      });
+  }
+
+  async function sendCertifaceData(ticket, appkey, documentImages) {
+    const url = `${SERVER_API_URL_FLEXIBLE_API}/certiface`;
+
+    const headers = new Headers();
+    headers.append('x-sub-org', '1');
+    headers.append('x-group', '1');
+    headers.append('x-branch', '1');
+    headers.append('x-from-sdk', 'true');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', '*/*');
+
+    const body = JSON.stringify({
+      ticket: ticket,
+      appkey: appkey,
+      documentImages: documentImages,
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: headers,
+      body: body,
+      redirect: 'follow',
+    };
+
+    return await fetch(url, requestOptions)
+      .then((response) => response.text())
+      .then((res) => {
+        return res;
+      })
+      .catch((error) => {
+        return error;
+      });
   }
 
   return {
+    SERVER_API_URL,
+    SERVER_API_URL_FLEXIBLE_API,
     getProductionKey,
     decryptProductionKey,
     startChallenge,
     captcha,
     getSessionToken,
     sendDocument,
+    sendCertifaceData,
   };
 })();

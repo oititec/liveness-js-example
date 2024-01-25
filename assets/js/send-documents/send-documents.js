@@ -1,7 +1,7 @@
-let SERVER_API_URL = env.BASE_URL;
-
 let streams = '';
 let appkey = window.localStorage.getItem('appkey');
+let apiType = window.localStorage.getItem('apiType');
+let ticket = window.localStorage.getItem('ticket');
 
 let snapsCaptures = [];
 let snapTempDOM = '';
@@ -295,9 +295,12 @@ const startCamera = () => {
   const constraints = {
     audio: false,
     video: {
-      facingMode: 'environment',
+      facingMode: 'right',
       width: { exact: 640 },
       height: { exact: 480 },
+      aspectRatio: { ideal: 1 },
+      focusMode: 'manual',
+      focusDistance: 0.33,
     },
   };
 
@@ -307,6 +310,9 @@ const startCamera = () => {
       width: { exact: 1280 },
       height: { exact: 720 },
       facingMode: 'environment',
+      aspectRatio: { ideal: 1 },
+      focusMode: 'manual',
+      focusDistance: 0.33,
     };
   }
 
@@ -528,7 +534,11 @@ const uploadPictures = () => {
     snap.replace('data:image/jpeg;base64,', '')
   );
 
-  sendDocument(appkey, snapsSend);
+  if (apiType === 'flexible-api') {
+    sendCertifaceData(appkey, ticket, snapsSend);
+  } else {
+    sendDocument(appkey, snapsSend);
+  }
 };
 
 const isMobile = () => {
@@ -694,71 +704,78 @@ const fetchSnapCaptures = (snap) => {
   thumbGroupCard.innerHTML = snapContent;
 };
 
+const uploadResponse = (res) => {
+  isLoaded = false;
+  uploadRequest = false;
+  uploadResp = false;
+  message = 'Documento enviado com sucesso';
+
+  backSetTypeCapture();
+
+  console.log(res);
+
+  showToastify(message, 'success');
+  showHideDivLoader();
+  showHideOverlay();
+  showHideBgOverlayWhite();
+  showHideBtnEnviar();
+  removeAppKeyFromLocalStorage();
+
+  overlay.classList.add('d-none');
+  thumbsGroup.classList.add('d-none');
+
+  btnTipoCaptura1foto.classList.add('disabled');
+  btnTipoCaptura2fotos.classList.add('disabled');
+};
+
+const uploadError = (err) => {
+  isLoaded = false;
+  message = 'Documento não localizado! Por favor reenvie o documento';
+
+  backSetTypeCapture();
+
+  console.log(err);
+
+  showToastify(message, 'error');
+  showHideDivLoader();
+  showHideOverlay();
+  // showHideRespUpload();
+  showHideBtnEnviar();
+
+  overlay.classList.add('d-none');
+  thumbsGroup.classList.add('d-none');
+};
+
 // Envia Documentos
 const sendDocument = async (appkey, images) => {
-  const url = `${SERVER_API_URL}/facecaptcha/service/captcha/document`;
+  const result = await facecaptchaService.sendDocument(appkey, images);
 
-  const headers = new Headers();
-  headers.append('Content-Type', 'application/json');
+  if (typeof result !== 'object') {
+    uploadResponse(result);
+  } else {
+    uploadError(result);
+  }
+};
 
-  var raw = JSON.stringify({
-    appkey: appkey,
-    images: images,
-  });
+const sendCertifaceData = async (appkey, ticket, documentImages) => {
+  const result = await facecaptchaService.sendCertifaceData(
+    ticket,
+    appkey,
+    documentImages
+  );
 
-  var requestOptions = {
-    method: 'POST',
-    headers: headers,
-    body: raw,
-    redirect: 'follow',
-  };
-
-  await fetch(url, requestOptions)
-    .then((response) => response.text())
-    .then((res) => {
-      isLoaded = false;
-      uploadRequest = false;
-      uploadResp = false;
-      message = 'Documento enviado com sucesso';
-
-      backSetTypeCapture();
-
-      console.log(res);
-
-      showToastify(message, 'success');
-      showHideDivLoader();
-      showHideOverlay();
-      showHideBgOverlayWhite();
-      showHideBtnEnviar();
-      removeAppKeyFromLocalStorage();
-
-      overlay.classList.add('d-none');
-      thumbsGroup.classList.add('d-none');
-
-      btnTipoCaptura1foto.classList.add('disabled');
-      btnTipoCaptura2fotos.classList.add('disabled');
-    })
-    .catch((err) => {
-      isLoaded = false;
-      message = 'Documento não localizado! Por favor reenvie o documento';
-
-      backSetTypeCapture();
-
-      console.log(err);
-
-      showToastify(message, 'error');
-      showHideDivLoader();
-      showHideOverlay();
-      // showHideRespUpload();
-      showHideBtnEnviar();
-
-      overlay.classList.add('d-none');
-      thumbsGroup.classList.add('d-none');
-    });
+  if (typeof result !== 'object') {
+    uploadResponse(result);
+  } else {
+    uploadError(result);
+  }
 };
 
 const removeAppKeyFromLocalStorage = () => {
+  window.localStorage.removeItem('apiType');
   window.localStorage.removeItem('appkey');
+  window.localStorage.removeItem('ticket');
+  window.localStorage.removeItem('errorMessage');
   window.localStorage.removeItem('hasLiveness');
 };
 
@@ -780,7 +797,10 @@ const showToastify = (message, typeMessage) => {
 };
 
 const deleteAppKey = () => {
+  window.localStorage.removeItem('apiType');
   window.localStorage.removeItem('appkey');
+  window.localStorage.removeItem('ticket');
+  window.localStorage.removeItem('errorMessage');
   window.localStorage.removeItem('hasLiveness');
 
   window.location.href = '/';
