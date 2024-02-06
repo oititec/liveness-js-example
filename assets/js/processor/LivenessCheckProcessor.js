@@ -80,15 +80,31 @@ var LivenessCheckProcessor = /** @class */ (function () {
             // Verificamos se a Sesão do servidor nos retornou uma propriedade de codID.
             // O fluxo da interface do usuário do SDK do dispositivo agora é orientado pela função continueToNextStep, que deve receber o scanResultBlob da resposta do SDK do servidor.
             if (responseJSON.codID) {
-              // Demonstra a configuração dinâmica da mensagem da tela de sucesso.
-              FaceTecSDK.FaceTecCustomization.setOverrideResultScreenSuccessMessage(
-                'Liveness\nConfirmado'
-              );
-              // Na v9.2.0+, basta passar scanResultBlob para a função continueToNextStep para avançar o fluxo do usuário.
-              // scanResultBlob é um blob proprietário e criptografado que controla a lógica do que acontece em seguida para o usuário.
-              faceScanResultCallback.proceedToNextStep(scanResultBlob);
+              if (
+                responseJSON.codID === 300.1 ||
+                responseJSON.codID === 300.2
+              ) {
+                faceScanResultCallback.cancel();
 
-              window.localStorage.setItem('hasLiveness', 'true');
+                SampleAppUtilities.displayStatus(
+                  'Prova de Vida Reprovada. Insira uma nova appkey e tente novamente.'
+                );
+
+                setTimeout(() => {
+                  SampleAppUtilities.disableControlButtons();
+                }, 2000);
+              } else {
+                // Demonstra a configuração dinâmica da mensagem da tela de sucesso.
+                FaceTecSDK.FaceTecCustomization.setOverrideResultScreenSuccessMessage(
+                  'Liveness\nConfirmado'
+                );
+
+                // Na v9.2.0+, basta passar scanResultBlob para a função continueToNextStep para avançar o fluxo do usuário.
+                // scanResultBlob é um blob proprietário e criptografado que controla a lógica do que acontece em seguida para o usuário.
+                faceScanResultCallback.proceedToNextStep(scanResultBlob);
+
+                window.localStorage.setItem('hasLiveness', 'true');
+              }
             } else {
               // CASE: resposta INESPERADA da API. Nosso código de exemplo desliga um booleano wasProcessed na raiz do objeto JSON --> Você define seus próprios contratos de API consigo mesmo e pode optar por fazer algo diferente aqui com base no erro.
               console.log('Resposta inesperada da API. Cancelando.');
