@@ -137,6 +137,7 @@ const SampleAppUtilities = (function () {
   return {
     displayStatus,
     fadeOutMainUIAndPrepareForSession,
+    disableControlButtons,
     enableControlButtons,
     generateUUId,
     formatUIForDevice,

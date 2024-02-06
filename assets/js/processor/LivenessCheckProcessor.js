@@ -24,11 +24,16 @@ var LivenessCheckProcessor = /** @class */ (function () {
         FaceTecSDK.FaceTecSessionStatus.SessionCompletedSuccessfully
       ) {
         console.log(
-          'A sessão não foi completada com sucesso. Cancelando. Status da Sessão: ' +
+          'Session was not completed successfully, cancelling.  Session Status: ' +
             FaceTecSDK.FaceTecSessionStatus[sessionResult.status]
         );
-        _this.latestNetworkRequest.abort();
+        this.latestNetworkRequest.abort();
         faceScanResultCallback.cancel();
+
+        SampleAppUtilities.displayStatus(
+          'A sessão foi encerrada antecipadamente, consulte os logs para obter mais detalhes.'
+        );
+
         return;
       }
       // IMPORTANTE: FaceTecSDK.FaceTecSessionStatus.SessionCompletedSuccessfully NÃO significa que a Verificação de Liveness foi bem-sucedida.
