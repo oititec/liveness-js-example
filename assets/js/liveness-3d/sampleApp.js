@@ -97,6 +97,8 @@ const sampleApp = (function () {
 
     resultSessionToken = result;
 
+    window.localStorage.setItem('hasLiveness', 'true');
+
     latestProcessor = new LivenessCheckProcessor(resultSessionToken, sampleApp);
   };
 
