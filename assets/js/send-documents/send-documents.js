@@ -296,16 +296,32 @@ const startCamera = () => {
     audio: false,
     video: {
       facingMode: 'environment',
-      width: { exact: 640 },
-      height: { exact: 480 },
+      width: {
+        min: 640,
+        ideal: 640,
+        max: 640,
+      },
+      height: {
+        min: 480,
+        ideal: 480,
+        max: 480,
+      },
     },
   };
 
   // se mobile, ajusta configurações de video para mobile
   if (isMobile()) {
     constraints.video = {
-      width: { exact: 1280 },
-      height: { exact: 720 },
+      width: {
+        min: 1280,
+        ideal: 1920,
+        max: 2560,
+      },
+      height: {
+        min: 720,
+        ideal: 1080,
+        max: 1440,
+      },
       facingMode: 'environment',
       focusMode: 'continuous',
       advanced: [
