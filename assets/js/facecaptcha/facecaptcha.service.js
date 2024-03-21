@@ -32,12 +32,12 @@ const facecaptchaService = (function () {
       redirect: 'follow',
     };
 
-    await fetch(url, requestOptions)
+    return await fetch(url, requestOptions)
       .then((response) => response.text())
       .then((res) => {
-        env.ProductionKeyText = JSON.parse(
+        return (env.ProductionKeyText = JSON.parse(
           cryptoActions.decChData(JSON.parse(res), productionKey.appKey)
-        ).productionKey;
+        ));
       })
       .catch((err) => {
         disableLivenessCheck();
