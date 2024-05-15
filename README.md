@@ -17,7 +17,7 @@ Para visualizar a documentação de cada módulo, utilize os links abaixo:
 
 - [Guia rápido de atualização](https://github.com/oititec/liveness-js-example/blob/main/update-guide/README.md)
 
-### [FaceTec SDK: 9.6.82](https://github.com/oititec/liveness-react-example/blob/main/core/9.6.82)
+### [FaceTec SDK: 9.6.82](https://github.com/oititec/liveness-js-example/blob/main/core/9.6.82)
 
 _data: 14/05/2024_
 
@@ -29,7 +29,7 @@ _data: 14/05/2024_
 - Added New Device-side and Server-side Video Injection Checks to mitigate Generative AI Threats.
 - Performance improvements on low-tier and mid-tier devices leading to Success Rate Improvements.
 
-### [FaceTec SDK: 9.6.75](https://github.com/oititec/liveness-react-example/blob/main/core/9.6.75)
+### [FaceTec SDK: 9.6.75](https://github.com/oititec/liveness-js-example/blob/main/core/9.6.75)
 
 _data: 26/03/2024_
 
@@ -41,7 +41,7 @@ _data: 26/03/2024_
 - Added New Device-side and Server-side Video Injection Checks to mitigate Generative AI Threats.
 - Performance improvements on low-tier and mid-tier devices leading to Success Rate Improvements.
 
-### [FaceTec SDK: 9.6.66](https://github.com/oititec/liveness-react-example/blob/main/core/9.6.66)
+### [FaceTec SDK: 9.6.66](https://github.com/oititec/liveness-js-example/blob/main/core/9.6.66)
 
 _data: 25/01/2024_
 
