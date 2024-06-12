@@ -1,72 +1,69 @@
 let SERVER_API_URL = env.BASE_URL;
 
-let streams = '';
-let appkey = window.localStorage.getItem('appkey');
+let appkey = window.localStorage.getItem('appkey') || '';
+let message = ''; // trocar para ''
+let sendDocument = false; // trocar pra false
+let isLoaded = false; // trocar pra false
+let showUpload = false; // trocar pra false
+let rotateCamera = false; // trocar pra false
+let snapsCaptures = []; // trocar para []
+let streams = ''; // trocar para ''
+let snapTempDOM = ''; // trocar para ''
+let btnControllers = false; // trocar pra false
+let showIniciar = false; // trocar pra false
+let uploadRequest = false; // trocar pra false
+let multiCapture = false; // trocar pra false
+let showTypeCapture = true; // trocar pra true
+let processing = false; // trocar pra false
+let showDesktop = false; // trocar pra false
+let indexTempSnap = -1; // trocar para -1
+let uploadResp = true; // trocar para true
 
-let snapsCaptures = [];
-let snapTempDOM = '';
-let message = '';
-
-let showTypeCapture = true;
-let multiCapture = false;
-let showIniciar = false;
-let showUpload = false;
-let isLoaded = false;
-let rotateCamera = false;
-let btnControllers = false;
-let processing = false;
-let indexTempSnap = -1;
-let showDesktop = false;
-let uploadRequest = false;
-let uploadResp = true;
-let countLoader = 0;
-
-let sendDocumentArea = document.getElementById('send-document-area');
-let bgOverlay = document.getElementById('bg-overlay');
-let bgOverlayWhite = document.getElementById('bg-overlay-white');
-let cameraRotate = document.getElementById('camera-rotate');
-let backContainer = document.getElementById('back-container');
 let btnTipoCaptura1foto = document.getElementById('btn-tipo-captura-1-foto');
 let btnTipoCaptura2fotos = document.getElementById('btn-tipo-captura-2-fotos');
-let btnVoltarTipoCaptura = document.getElementById('btn-voltar-tipo-captura');
-let captureTypeBox = document.getElementById('captureTypeBox');
-let contentVideo = document.getElementById('content-video');
-let containerVideo = document.getElementById('container-video');
-let divLoader = document.getElementById('divLoader');
-let overlay = document.getElementById('overlay');
-let videoPlayer = document.getElementById('player');
-let thumbPicture = document.getElementById('thumb-picture');
-let imgCamera = document.getElementById('imgCamera');
-let thumbsGroup = document.getElementById('thumbs-group');
-let thumbGroupCard = document.getElementById('thumb-group-card');
-let imgCameraGroup = document.getElementById('imgCameraGroup');
-let trocarFoto = document.getElementById('trocar-foto');
-let btnPhotoControllers = document.getElementById('btnControllers');
-let snapTickButton = document.getElementById('snapTick');
-let resetSnapButton = document.getElementById('resetSnap');
-let divButton = document.getElementById('divButton');
-let btnIniciar = document.getElementById('btnIniciar');
-let btnEnviar = document.getElementById('btnEnviar');
-let loaderProgressBar = document.getElementById('loader-progress-bar');
-let btnDeleteAppKey = document.getElementById('btn-delete-app-key');
+let divSendDocument = document.getElementById('send-document');
+let divBgOverlay = document.getElementById('bg-overlay');
+let divMsg = document.getElementById('div-msg');
+let spanMsg = document.getElementById('span-msg');
+let video = document.getElementById('video');
+let divThumbPicture = document.getElementById('thumb-picture');
+let divThumbGroupCard = document.getElementById('thumb-group-card');
+let imgCamera = document.getElementById('img-camera');
+let divThumbsGroup = document.getElementById('thumbs-group');
+let divThumbGroupCardMultiple = document.getElementById(
+  'thumb-group-card-multiple'
+);
+let sendOrChangePictures = document.getElementById('send-or-change-pictures');
+let divThumbGroupCardCaptures = document.getElementById(
+  'thumb-group-card-captures'
+);
+let btnControllersButtons = document.getElementById('btn-controllers');
+let divButton = document.getElementById('div-button');
+let btnIniciar = document.getElementById('btn-iniciar');
+let btnEnviar = document.getElementById('btn-enviar');
+let btnEnviarIcon = document.getElementById('btn-enviar-icon');
+let btnEnviarText = document.getElementById('btn-enviar-text');
 
-const initEvents = (event) => {
+const initialEvents = (event) => {
   event.preventDefault();
 
   showDesktop = !isMobile();
 
-  showHideSendDocumentArea();
-  showHideBgOverlay();
-  showHideBgOverlay();
-  showHideCameraRotation();
-  showHideBackContainerContent();
-  showHideContentVideo();
-  showHideDivLoader();
-  showHideOverlay();
-  showHideVideoPlayer();
-  showHideThumbPicture();
-  fillImageCamera('');
-  showHideThumbsGroup();
+  divSendDocument.classList.add('d-none');
+  divBgOverlay.classList.add('d-none');
+  divMsg.classList.add('d-none');
+  video.classList.add('d-none');
+  divThumbPicture.classList.add('d-none');
+  divThumbsGroup.classList.add('d-none');
+  btnControllersButtons.classList.add('d-none');
+  divButton.classList.add('d-none');
+  btnIniciar.classList.add('d-none');
+  btnEnviar.classList.add('d-none');
+
+  if (isMobile()) {
+    divThumbPicture.classList.add('mobile-thumb');
+    divThumbsGroup.classList.add('mobile-thumb');
+  }
 
   if (!appkey) {
     btnTipoCaptura1foto.classList.add('disabled');
@@ -74,37 +71,146 @@ const initEvents = (event) => {
   }
 };
 
-window.addEventListener('load', initEvents);
+window.addEventListener('load', initialEvents);
 
-const onResize = (event) => {
+const changeEvents = () => {
+  sendDocument
+    ? divSendDocument.classList.remove('d-none')
+    : divSendDocument.classList.add('d-none');
+
+  !isMobile()
+    ? divBgOverlay.classList.remove('d-none')
+    : divBgOverlay.classList.add('d-none');
+
+  message !== ''
+    ? divMsg.classList.remove('d-none')
+    : divMsg.classList.add('d-none');
+
+  if (message !== '') {
+    spanMsg.innerHTML = message;
+  } else {
+    spanMsg.innerHTML = '';
+  }
+
+  !showUpload && !isMobile()
+    ? video.classList.remove('d-none')
+    : video.classList.add('d-none');
+
+  snapTempDOM !== ''
+    ? divThumbPicture.classList.remove('d-none')
+    : divThumbPicture.classList.add('d-none');
+
+  if (snapTempDOM !== '') {
+    imgCamera.src = snapTempDOM;
+  } else {
+    imgCamera.src = '';
+  }
+
+  showUpload && !rotateCamera
+    ? divThumbsGroup.classList.remove('d-none')
+    : divThumbsGroup.classList.add('d-none');
+
+  if (snapsCaptures.length > 0) {
+    fetchSnapCaptures(snapsCaptures);
+  }
+
+  btnControllers
+    ? btnControllersButtons.classList.remove('d-none')
+    : btnControllersButtons.classList.add('d-none');
+
+  rotateCamera === false
+    ? divButton.classList.remove('d-none')
+    : divButton.classList.add('d-none');
+
+  showIniciar && !btnControllers && !showUpload && !isMobile()
+    ? btnIniciar.classList.remove('d-none')
+    : btnIniciar.classList.add('d-none');
+
+  showUpload && !uploadRequest
+    ? btnEnviar.classList.remove('d-none')
+    : btnEnviar.classList.add('d-none');
+};
+
+const handleStream = (stream) => {
+  setTimeout(() => {
+    video.setAttribute('autoplay', '');
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+
+    video.srcObject = stream;
+
+    streams = stream.getVideoTracks();
+    isLoaded = true;
+    showIniciar = true;
+    btnControllers = false;
+    showUpload = false;
+
+    changeEvents();
+  }, 1000);
+};
+
+const setTypeCapture = (type) => {
+  if (isMobile()) {
+    let capturaFoto = document.getElementById('captura-foto');
+
+    capturaFoto.click();
+
+    capturaFoto.addEventListener('change', () => {
+      startCapture();
+    });
+  }
+
+  if (type === 1) {
+    message = 'Carregando...';
+    sendDocument = true;
+    multiCapture = false;
+    showTypeCapture = false;
+    onResize();
+    changeEvents();
+
+    setTimeout(() => {
+      message = '';
+      isLoaded = false;
+
+      changeEvents();
+    }, 1000);
+  } else {
+    message = 'Carregando...';
+    sendDocument = true;
+    multiCapture = true;
+    showTypeCapture = false;
+    onResize();
+    changeEvents();
+
+    setTimeout(() => {
+      message = '';
+      isLoaded = false;
+
+      changeEvents();
+    }, 1000);
+  }
+};
+
+const onResize = () => {
   if (!showTypeCapture && !processing && multiCapture && !showDesktop) {
     stopCameraStreams();
 
     if (window.innerWidth > window.innerHeight) {
       rotateCamera = false;
       message = '';
+      isLoaded = false;
 
-      showHideThumbsGroup();
-      showToastify(message, 'warning');
-      showHideDivButton();
+      changeEvents();
 
       if (!btnControllers && !showUpload) {
         startCamera();
       }
-
-      showHideCameraRotation();
     } else {
       rotateCamera = true;
       message = '';
       isLoaded = false;
 
-      showHideCameraRotation();
-      showToastify(message, 'warning');
-      showHideDivLoader();
-      showHideOverlay();
-      showHideThumbsGroup();
-      showHideDivButton();
-      showHideBtnEnviar();
+      changeEvents();
     }
   } else if (!showTypeCapture && !processing && !multiCapture && !showDesktop) {
     if (
@@ -116,132 +222,58 @@ const onResize = (event) => {
       message = '';
       isLoaded = false;
 
-      showHideCameraRotation();
-      showHideDivLoader();
-      showHideOverlay();
-      showHideThumbsGroup();
-      showHideDivButton();
-      showHideBtnEnviar();
+      changeEvents();
     } else {
       rotateCamera = false;
       message = '';
+      isLoaded = false;
 
-      showHideThumbsGroup();
-      showHideDivButton();
+      changeEvents();
 
       if (!btnControllers && !showUpload) {
         startCamera();
-      }
 
-      showHideCameraRotation();
+        changeEvents();
+      }
     }
   } else if (showDesktop) {
     rotateCamera = false;
     message = '';
 
-    showHideThumbsGroup();
-    showHideDivButton();
+    changeEvents();
 
     if (!btnControllers && !showUpload) {
       startCamera();
-    }
 
-    showHideCameraRotation();
+      changeEvents();
+    }
   } else if (processing) {
     if (multiCapture) {
       if (window.innerWidth < window.innerHeight) {
         rotateCamera = true;
 
-        showHideCameraRotation();
-        showHideThumbsGroup();
-        showHideDivButton();
+        changeEvents();
       } else {
         rotateCamera = false;
 
-        showHideCameraRotation();
-        showHideThumbsGroup();
-        showHideDivButton();
+        changeEvents();
       }
     } else {
       if (!showDesktop) {
         if (window.innerWidth < window.innerHeight) {
           rotateCamera = false;
 
-          showHideCameraRotation();
-          showHideThumbsGroup();
-          showHideDivButton();
+          changeEvents();
         } else {
           rotateCamera = true;
 
-          showHideCameraRotation();
-          showHideThumbsGroup();
-          showHideDivButton();
+          changeEvents();
         }
       }
     }
   }
 };
 
-// Volta para tela de seleção da quantidade de fotos à capturar
-const backSetTypeCapture = () => {
-  uploadRequest = false;
-  btnControllers = false;
-  showTypeCapture = true;
-  showIniciar = false;
-  showUpload = false;
-  snapsCaptures = [];
-  countLoader = 0;
-
-  loaderProgressBar.setAttribute('aria-valuenow', countLoader);
-  loaderProgressBar.style.width = `${countLoader}%`;
-
-  videoPlayer.removeAttribute('autoplay');
-  videoPlayer.removeAttribute('muted');
-  videoPlayer.removeAttribute('playsinline');
-  videoPlayer.removeAttribute('style');
-  videoPlayer.style.opacity = 0;
-
-  stopCameraStreams();
-  showHideContentVideo();
-  showHideVideoPlayer();
-  showHideBackContainerContent();
-  showHideSendDocumentArea();
-  showHideBgOverlay();
-  showHideBgOverlayWhite();
-  // showHideRespUpload();
-  showHidePhotoControllers();
-  showHideBtnIniciar();
-  showHideBtnEnviar();
-  showHideThumbsGroup();
-
-  thumbGroupCard.innerHTML = '';
-};
-
-// Seleciona a quantidade de fotos que vai capturar
-const setTypeCapture = (type) => {
-  if (type === 1) {
-    multiCapture = false;
-    showTypeCapture = false;
-
-    onResize();
-    showHideSendDocumentArea();
-    showHideBgOverlay();
-    showHideContentVideo();
-    fillLoader(countLoader);
-  } else {
-    multiCapture = true;
-    showTypeCapture = false;
-
-    onResize();
-    showHideSendDocumentArea();
-    showHideBgOverlay();
-    showHideContentVideo();
-    showHideThumbsGroup();
-    fillLoader(countLoader);
-  }
-};
-
-// Abertura da câmera
 const startCamera = () => {
   if (multiCapture) {
     if (indexTempSnap !== -1) {
@@ -249,40 +281,34 @@ const startCamera = () => {
         indexTempSnap === 1
           ? 'Centralize o verso do documento'
           : 'Centralize a frente do documento';
+      isLoaded = false;
+
+      changeEvents();
     } else {
       message =
         snapsCaptures.length === 0
           ? 'Centralize a frente do documento'
           : 'Centralize o verso do documento';
+      isLoaded = false;
+
+      changeEvents();
     }
   } else {
     message = 'Centralize o documento';
-  }
 
-  showToastify(message, 'warning');
+    changeEvents();
+  }
 
   showIniciar = false;
   isLoaded = true;
   processing = true;
 
-  showHideBackContainerContent();
-  showHideDivLoader();
-  showHideOverlay();
-  showHideBtnIniciar();
-  showHideBtnEnviar();
+  showIniciar = true;
+  isLoaded = false;
+  message = '';
+  processing = false;
 
-  setTimeout(() => {
-    showIniciar = true;
-    isLoaded = false;
-    message = '';
-    processing = false;
-
-    showHideBackContainerContent();
-    showHideDivLoader();
-    showHideOverlay();
-    showHideBtnIniciar();
-    showHideBtnEnviar();
-  }, 2500);
+  changeEvents();
 
   navigator.getUserMedia =
     navigator.getUserMedia ||
@@ -297,22 +323,6 @@ const startCamera = () => {
     video: {
       facingMode: 'environment',
       width: {
-        min: 640,
-        ideal: 640,
-        max: 640,
-      },
-      height: {
-        min: 480,
-        ideal: 480,
-        max: 480,
-      },
-    },
-  };
-
-  // se mobile, ajusta configurações de video para mobile
-  if (isMobile()) {
-    constraints.video = {
-      width: {
         min: 1280,
         ideal: 1920,
         max: 2560,
@@ -322,233 +332,29 @@ const startCamera = () => {
         ideal: 1080,
         max: 1440,
       },
-      facingMode: 'environment',
-      focusMode: 'continuous',
-      advanced: [
-        { zoom: isAndroid() ? 2.0 : 1.0, torch: isAndroid() ? true : false },
-      ],
-    };
-  }
+    },
+  };
 
-  // verifica suporte a getUserMedia
-  if (navigator.getUserMedia) {
+  if (!isMobile()) {
     navigator.mediaDevices
       .getUserMedia(constraints)
       .then((stream) => handleStream(stream))
       .catch((err) => {
         console.log('Sem câmera! ' + err);
       });
-  } else {
-    console.log('getUserMedia não suportado');
   }
 };
 
-const handleStream = (stream) => {
-  videoPlayer.setAttribute('autoplay', '');
-  videoPlayer.setAttribute('muted', '');
-  videoPlayer.setAttribute('playsinline', '');
-
-  videoPlayer.srcObject = stream;
-  streams = stream.getVideoTracks();
-};
-
-// Fecha a câmera
 const stopCameraStreams = () => {
   if (streams) {
     streams.forEach((stream) => {
       stream.stop();
     });
+
     streams = null;
+
+    changeEvents();
   }
-};
-
-const startCapture = async () => {
-  processing = true;
-
-  snapCapture();
-
-  message = 'Processando';
-  showIniciar = false;
-  isLoaded = true;
-
-  stopCameraStreams();
-  showHideBackContainerContent();
-  showToastify(message, 'warning');
-  showHideDivLoader();
-  showHideOverlay();
-  showHideBtnIniciar();
-  showHideBtnEnviar();
-
-  setTimeout(() => {
-    message = '';
-    btnControllers = true;
-    isLoaded = false;
-    processing = false;
-
-    showHideBackContainerContent();
-    showHideDivLoader();
-    showHideOverlay();
-    showHidePhotoControllers();
-    showHideBtnIniciar();
-    showHideBtnEnviar();
-  }, 2500);
-};
-
-// Limpa as listar e reinicia a Câmera
-const resetSnap = () => {
-  snapTempDOM = '';
-  btnControllers = false;
-
-  showHideThumbPicture();
-  fillImageCamera(snapTempDOM);
-  showHidePhotoControllers();
-  showHideBtnIniciar();
-
-  if (multiCapture) {
-    if (snapsCaptures.length < 2) {
-      startCamera();
-
-      bgOverlay.classList.remove('d-none');
-      bgOverlayWhite.classList.add('d-none');
-    } else {
-      showUpload = true;
-
-      stopCameraStreams();
-      showHideVideoPlayer();
-      showHideBtnIniciar();
-      showHideBtnEnviar();
-      showHideThumbsGroup();
-
-      bgOverlay.classList.add('d-none');
-      bgOverlayWhite.classList.remove('d-none');
-    }
-  } else {
-    if (snapsCaptures.length < 1) {
-      startCamera();
-
-      bgOverlay.classList.remove('d-none');
-      bgOverlayWhite.classList.add('d-none');
-    } else {
-      showUpload = true;
-
-      stopCameraStreams();
-      showHideVideoPlayer();
-      showHideBtnIniciar();
-      showHideBtnEnviar();
-      showHideThumbsGroup();
-
-      bgOverlay.classList.add('d-none');
-      bgOverlayWhite.classList.remove('d-none');
-    }
-  }
-};
-
-// captura imagem para validação do usuário
-const snapCapture = () => {
-  snapTempDOM = snap();
-
-  showHideThumbPicture();
-  fillImageCamera(snapTempDOM);
-};
-
-// prepara captura de imagem
-const snapTick = () => {
-  // Adiciona as fotos nas listas
-  if (indexTempSnap !== -1) {
-    snapsCaptures.splice(indexTempSnap, 0, snapTempDOM);
-  } else {
-    snapsCaptures.push(snapTempDOM);
-  }
-
-  indexTempSnap = -1;
-
-  // Limpa as listas e reinicia a câmera
-  resetSnap();
-};
-
-// captura imagem da câmera
-const snap = () => {
-  const canvas = document.getElementById('fc_canvas');
-  const ctx = canvas.getContext('2d');
-
-  let ratio = videoPlayer.videoWidth / videoPlayer.videoHeight;
-  let widthReal = 0;
-  let heightReal = 0;
-  let startX = 0;
-  let startY = 0;
-
-  if (ratio >= 1 && !showDesktop) {
-    ctx.canvas.width = 1280;
-    ctx.canvas.height = 768;
-    widthReal = videoPlayer.videoWidth;
-    heightReal = videoPlayer.videoHeight;
-    startX = 0;
-    startY = 0;
-  } else {
-    // retrato
-    ctx.canvas.width = 640;
-    ctx.canvas.height = 960;
-    ratio = videoPlayer.videoHeight / videoPlayer.videoWidth;
-    // verifica proporção
-    if (ratio > 1.5) {
-      widthReal = videoPlayer.videoWidth;
-      heightReal = videoPlayer.videoHeight;
-      startX = 0;
-      startY = 0;
-    } else {
-      widthReal = videoPlayer.videoHeight / 1.5;
-      heightReal = videoPlayer.videoHeight;
-      startX = (videoPlayer.videoWidth - widthReal) / 2;
-      startY = 0;
-    }
-  }
-
-  // crop image video
-  ctx.drawImage(
-    videoPlayer,
-    startX,
-    startY,
-    widthReal,
-    heightReal,
-    0,
-    0,
-    ctx.canvas.width,
-    ctx.canvas.height
-  );
-
-  const img = new Image();
-  img.src = canvas.toDataURL('image/jpeg');
-  return img.src;
-};
-
-// remove imagem das listas
-const removeSnapFromLists = (index) => {
-  indexTempSnap = index;
-  snapsCaptures.splice(index, 1);
-  showUpload = false;
-
-  resetSnap();
-  showHideVideoPlayer();
-  showHideBtnIniciar();
-  showHideBtnEnviar();
-  showHideThumbsGroup();
-};
-
-// Envia as fotos e finaliza o upload de imagens
-const uploadPictures = () => {
-  isLoaded = true;
-  message = 'Enviando';
-
-  showToastify(message, 'warning');
-  showHideDivLoader();
-  showHideOverlay();
-  showHideBtnEnviar();
-
-  const snapsSend = snapsCaptures.map((snap) =>
-    snap.replace('data:image/jpeg;base64,', '')
-  );
-
-  sendDocument(appkey, snapsSend);
 };
 
 const isMobile = () => {
@@ -557,153 +363,314 @@ const isMobile = () => {
   );
 };
 
-const isAndroid = () => {
-  return /Android/i.test(navigator.userAgent);
-};
+const startCapture = () => {
+  if (isMobile()) {
+    snapCapture();
+  } else {
+    processing = true;
+    message = 'Processando...';
+    showIniciar = false;
+    isLoaded = true;
 
-const showHideSendDocumentArea = () => {
-  !showTypeCapture && !showUpload
-    ? sendDocumentArea.classList.remove('d-none')
-    : sendDocumentArea.classList.add('d-none');
-};
+    changeEvents();
 
-const showHideBgOverlay = () => {
-  !showTypeCapture && !showUpload
-    ? bgOverlay.classList.remove('d-none')
-    : bgOverlay.classList.add('d-none');
-};
-
-const showHideBgOverlayWhite = () => {
-  !showTypeCapture && !showUpload
-    ? bgOverlayWhite.classList.remove('d-none')
-    : bgOverlayWhite.classList.add('d-none');
-};
-
-const showHideCameraRotation = () => {
-  rotateCamera
-    ? cameraRotate.classList.remove('d-none')
-    : cameraRotate.classList.add('d-none');
-};
-
-const showHideBackContainerContent = () => {
-  !showTypeCapture && !processing
-    ? backContainer.classList.remove('d-none')
-    : backContainer.classList.add('d-none');
-};
-
-const showHideContentVideo = () => {
-  !showTypeCapture
-    ? contentVideo.classList.remove('d-none')
-    : contentVideo.classList.add('d-none');
-
-  showDesktop
-    ? containerVideo.classList.add('contentDesktop')
-    : containerVideo.classList.remove('contentDesktop');
-
-  showUpload && showDesktop
-    ? containerVideo.classList.add('fullDesktop')
-    : containerVideo.classList.remove('fullDesktop');
-};
-
-const fillLoader = (count) => {
-  let counting = setInterval(() => {
-    if (count < 101) {
-      loaderProgressBar.setAttribute('aria-valuenow', count);
-      loaderProgressBar.style.width = `${count}%`;
-
-      count++;
-
+    setTimeout(() => {
+      snapCapture();
       stopCameraStreams();
-      showHideVideoPlayer();
-    } else {
-      startCamera();
-      showHideVideoPlayer();
 
-      videoPlayer.removeAttribute('style');
+      message = '';
+      btnControllers = true;
+      isLoaded = false;
+      processing = false;
 
-      clearInterval(counting);
+      changeEvents();
+    }, 1500);
+  }
+
+  changeEvents();
+};
+
+const resetSnap = () => {
+  const resetMobileImage = () => {
+    let imgMobile = document.getElementById('img-mobile');
+    imgMobile.setAttribute('src', '');
+
+    let capturaFoto = document.getElementById('captura-foto');
+
+    if (snapsCaptures.length < 1) {
+      capturaFoto.click();
+
+      changeEvents();
     }
-  }, 10);
+  };
 
-  return counting;
+  const resetControls = () => {
+    if (isMobile()) {
+      resetMobileImage();
+    }
+
+    snapTempDOM = '';
+    btnControllers = false;
+
+    changeEvents();
+  };
+
+  const resetShowUpload = () => {
+    let capturaFoto = document.getElementById('captura-foto');
+    let imgMobile = document.getElementById('img-mobile');
+
+    if (!isMobile()) {
+      showUpload = true;
+
+      changeEvents();
+    } else {
+      capturaFoto.value = '';
+      imgMobile.src = '';
+
+      showUpload = true;
+      rotateCamera = false;
+
+      changeEvents();
+    }
+  };
+
+  if (multiCapture) {
+    if (snapsCaptures.length < 2) {
+      resetControls();
+
+      changeEvents();
+
+      if (!isMobile()) {
+        startCamera();
+        changeEvents();
+      } else {
+        let capturaFoto = document.getElementById('captura-foto');
+
+        capturaFoto.click();
+
+        changeEvents();
+      }
+    } else {
+      resetShowUpload();
+
+      changeEvents();
+
+      if (!isMobile()) {
+        stopCameraStreams();
+
+        changeEvents();
+      }
+    }
+  } else {
+    if (snapsCaptures.length < 1) {
+      resetControls();
+
+      changeEvents();
+
+      if (!isMobile()) {
+        startCamera();
+
+        changeEvents();
+      }
+    } else {
+      resetShowUpload();
+
+      changeEvents();
+
+      if (!isMobile()) {
+        stopCameraStreams();
+
+        changeEvents();
+      }
+    }
+  }
 };
 
-const showHideDivLoader = () => {
-  isLoaded
-    ? divLoader.classList.remove('d-none')
-    : divLoader.classList.add('d-none');
+const snapCapture = () => {
+  return (snapTempDOM = snap());
 };
 
-const showHideOverlay = () => {
-  !showTypeCapture && !rotateCamera
-    ? overlay.classList.remove('d-none')
-    : overlay.classList.add('d-none');
+const snapTick = () => {
+  // Adiciona as fotos nas listas
+  if (indexTempSnap !== -1) {
+    snapsCaptures.splice(indexTempSnap, 0, snapTempDOM);
+
+    changeEvents();
+  } else {
+    snapsCaptures.push(snapTempDOM);
+
+    changeEvents();
+  }
+
+  const tempSnap = () => {
+    indexTempSnap = -1;
+    btnControllers = false;
+    showTypeCapture = false;
+    showUpload = false;
+
+    changeEvents();
+  };
+
+  // Limpa as listas e reinicia a câmera
+  tempSnap();
+  resetSnap();
 };
 
-const showHideVideoPlayer = () => {
-  !showUpload
-    ? videoPlayer.classList.remove('d-none')
-    : videoPlayer.classList.add('d-none');
+const snap = () => {
+  const capturaFoto = document.getElementById('captura-foto');
+  const imgMobile = document.getElementById('img-mobile');
+  const fotoCapturada = capturaFoto.files[0];
+  const video = document.getElementById('video');
+  const canvas = document.getElementById('fc_canvas');
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
+
+  let ratio = !isMobile() ? video.videoWidth / video.videoHeight : 0;
+  let widthReal = 0;
+  let heightReal = 0;
+  let startX = 0;
+  let startY = 0;
+
+  if (ratio >= 1 && !showDesktop) {
+    ctx.canvas.width = 1280;
+    ctx.canvas.height = 768;
+    widthReal = video.videoWidth;
+    heightReal = video.videoHeight;
+    startX = 0;
+    startY = 0;
+  } else {
+    // retrato
+    ctx.canvas.width = 640;
+    ctx.canvas.height = 960;
+    ratio = !isMobile() ? video.videoWidth / video.videoHeight : 0;
+    // verifica proporção
+    if (ratio > 1.5) {
+      widthReal = video.videoWidth;
+      heightReal = video.videoHeight;
+      startX = 0;
+      startY = 0;
+    } else {
+      widthReal = !isMobile() ? video.videoHeight / 1.5 : 0;
+      heightReal = !isMobile() ? video.videoHeight : 0;
+      startX = (!isMobile() ? video.videoWidth - widthReal : 0) / 2;
+      startY = 0;
+    }
+  }
+
+  const resizeMe = (img) => {
+    var width = img.width;
+    var height = img.height;
+
+    var max_width = 1200;
+    var max_height = 1600;
+
+    if (width > height) {
+      if (width > max_width) {
+        height = Math.round((height *= max_width / width));
+        width = max_width;
+      }
+    } else {
+      if (height > max_height) {
+        width = Math.round((width *= max_height / height));
+        height = max_height;
+      }
+    }
+
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, width, height);
+
+    return canvas.toDataURL('image/jpeg', 0.85);
+  };
+
+  if (isMobile()) {
+    const reader = new FileReader();
+
+    reader.readAsArrayBuffer(fotoCapturada);
+
+    reader.onload = (e) => {
+      let blob = new Blob([e.target.result]);
+      window.URL = window.URL || window.webkitURL;
+      let blobURL = window.URL.createObjectURL(blob);
+
+      imgMobile.src = blobURL;
+
+      imgMobile.onload = () => {
+        let resized = resizeMe(imgMobile);
+
+        let newinput = document.createElement('input');
+        newinput.type = 'hidden';
+        newinput.name = 'images[]';
+        newinput.value = resized;
+
+        setTimeout(() => {
+          snapTempDOM = newinput.value;
+          message = '';
+          btnControllers = true;
+          sendDocument = true;
+          isLoaded = false;
+          processing = false;
+
+          changeEvents();
+
+          return imgMobile.src;
+        }, 100);
+      };
+    };
+  } else {
+    // crop image video
+    ctx.drawImage(
+      video,
+      startX,
+      startY,
+      widthReal,
+      heightReal,
+      0,
+      0,
+      ctx.canvas.width,
+      ctx.canvas.height
+    );
+
+    img.src = canvas.toDataURL('image/jpeg');
+
+    changeEvents();
+
+    return img.src;
+  }
 };
 
-const showHideThumbPicture = () => {
-  snapTempDOM !== ''
-    ? thumbPicture.classList.remove('d-none')
-    : thumbPicture.classList.add('d-none');
-};
+const removeSnapFromLists = (index) => {
+  const snapRemoval = () => {
+    indexTempSnap = index;
+    showUpload = false;
+    message = 'Carregando...';
+    sendDocument = true;
+    showTypeCapture = false;
+    snapsCaptures.splice(index, 1);
 
-const fillImageCamera = (image) => {
-  imgCamera.src = image;
-};
+    changeEvents();
+  };
 
-const showHideThumbsGroup = () => {
-  showUpload && !rotateCamera
-    ? thumbsGroup.classList.remove('d-none')
-    : thumbsGroup.classList.add('d-none');
+  setTimeout(() => {
+    message = '';
+    isLoaded = false;
 
-  snapsCaptures.length > 0 && fetchSnapCaptures(snapsCaptures);
-};
+    changeEvents();
+  }, 300);
 
-// const showHideRespUpload = () => {
-//   uploadRequest
-//     ? respUpload.classList.remove('d-none')
-//     : respUpload.classList.add('d-none');
-
-//   // uploadRespMessage.innerHTML = text;
-// };
-
-const showHidePhotoControllers = () => {
-  btnControllers
-    ? btnPhotoControllers.classList.remove('d-none')
-    : btnPhotoControllers.classList.add('d-none');
-};
-
-const showHideDivButton = () => {
-  rotateCamera === false
-    ? divButton.classList.remove('d-none')
-    : divButton.classList.add('d-none');
-};
-
-const showHideBtnIniciar = () => {
-  showIniciar && !btnControllers && !showUpload
-    ? btnIniciar.classList.remove('d-none')
-    : btnIniciar.classList.add('d-none');
-};
-
-const showHideBtnEnviar = () => {
-  showUpload && !uploadRequest
-    ? btnEnviar.classList.remove('d-none')
-    : btnEnviar.classList.add('d-none');
-
-  isLoaded
-    ? (btnEnviar.setAttribute('disabled', ''),
-      btnEnviar.classList.add('disabled'))
-    : (btnEnviar.removeAttribute('disabled'),
-      btnEnviar.classList.remove('disabled'));
+  snapRemoval();
+  resetSnap();
 };
 
 const fetchSnapCaptures = (snap) => {
   let snapContent = '';
+
+  if (snap.length === 2) {
+    sendOrChangePictures.innerHTML = 'Deseja enviar ou trocar as fotos?';
+  } else {
+    sendOrChangePictures.innerHTML = 'Deseja enviar ou trocar a foto?';
+  }
 
   for (let i = 0; i < snap.length; i++) {
     snapContent += `
@@ -715,11 +682,27 @@ const fetchSnapCaptures = (snap) => {
     `;
   }
 
-  thumbGroupCard.innerHTML = snapContent;
+  divThumbGroupCardCaptures.innerHTML = snapContent;
+
+  btnEnviarIcon.innerHTML = 'outbox';
+  btnEnviarText.innerHTML = `Enviar foto${snap.length === 2 ? 's' : ''}`;
 };
 
-// Envia Documentos
-const sendDocument = async (appkey, images) => {
+const uploadPictures = async () => {
+  setTimeout(() => {
+    btnEnviar.setAttribute('disabled', '');
+    btnEnviarIcon.innerHTML = 'cloud_upload';
+    btnEnviarText.innerHTML = 'Carregando...';
+  });
+
+  isLoaded = true;
+
+  changeEvents();
+
+  const snapsSend = snapsCaptures.map((snap) => {
+    snap.replace('data:image/jpeg;base64,', '');
+  });
+
   const url = `${SERVER_API_URL}/facecaptcha/service/captcha/document`;
 
   const headers = new Headers();
@@ -727,7 +710,7 @@ const sendDocument = async (appkey, images) => {
 
   var raw = JSON.stringify({
     appkey: appkey,
-    images: images,
+    images: snapsSend,
   });
 
   var requestOptions = {
@@ -740,67 +723,35 @@ const sendDocument = async (appkey, images) => {
   await fetch(url, requestOptions)
     .then((response) => response.text())
     .then((res) => {
-      isLoaded = false;
-      uploadRequest = false;
-      uploadResp = false;
-      message = 'Documento enviado com sucesso';
-
-      backSetTypeCapture();
-
       console.log(res);
 
-      showToastify(message, 'success');
-      showHideDivLoader();
-      showHideOverlay();
-      showHideBgOverlayWhite();
-      showHideBtnEnviar();
-      removeAppKeyFromLocalStorage();
+      setTimeout(() => {
+        isLoaded = false;
+        uploadRequest = true;
+        uploadResp = false;
 
-      overlay.classList.add('d-none');
-      thumbsGroup.classList.add('d-none');
+        changeEvents();
+      }, 1000);
 
-      btnTipoCaptura1foto.classList.add('disabled');
-      btnTipoCaptura2fotos.classList.add('disabled');
+      window.alert('Documento enviado com sucesso');
+
+      window.localStorage.removeItem('appkey');
+
+      window.location.reload();
     })
     .catch((err) => {
-      isLoaded = false;
-      message = 'Documento não localizado! Por favor reenvie o documento';
-
-      backSetTypeCapture();
-
       console.log(err);
 
-      showToastify(message, 'error');
-      showHideDivLoader();
-      showHideOverlay();
-      // showHideRespUpload();
-      showHideBtnEnviar();
+      setTimeout(() => {
+        isLoaded = false;
 
-      overlay.classList.add('d-none');
-      thumbsGroup.classList.add('d-none');
+        window.alert(
+          'Documento não localizado! Por favor reenvie o documento.'
+        );
+
+        window.location.reload();
+      }, 1000);
     });
-};
-
-const removeAppKeyFromLocalStorage = () => {
-  window.localStorage.removeItem('appkey');
-  window.localStorage.removeItem('hasLiveness');
-};
-
-const showToastify = (message, typeMessage) => {
-  Toastify({
-    text: message,
-    className: typeMessage,
-    duration: 5000,
-    close: true,
-    gravity: 'top',
-    position: 'right',
-    stopOnFocus: true,
-    ariaLive: 'polite',
-  }).showToast();
-
-  let toastifyElementButton = document.getElementsByClassName('toast-close')[0];
-
-  toastifyElementButton.setAttribute('aria-label', 'Fechar');
 };
 
 const deleteAppKey = () => {
@@ -809,12 +760,3 @@ const deleteAppKey = () => {
 
   window.location.href = '/';
 };
-
-btnVoltarTipoCaptura.addEventListener('click', () => backSetTypeCapture());
-btnTipoCaptura1foto.addEventListener('click', () => setTypeCapture(1));
-btnTipoCaptura2fotos.addEventListener('click', () => setTypeCapture(2));
-snapTickButton.addEventListener('click', () => snapTick());
-resetSnapButton.addEventListener('click', () => resetSnap());
-btnIniciar.addEventListener('click', () => startCapture());
-btnEnviar.addEventListener('click', () => uploadPictures());
-btnDeleteAppKey.addEventListener('click', () => deleteAppKey());

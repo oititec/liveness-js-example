@@ -34,129 +34,124 @@
         <div class="col-12 mt-4">
           <a href="/home/index.html">Voltar</a>
         </div>
-        <div class="col-12 mb-4">
+        <div class="coll-12 mb-4">
           <h1>Envio de documentos</h1>
           <p>Para começarmos, escolha o tipo de documento que deseja enviar:</p>
         </div>
-        <div id="captureTypeBox">
-          <div class="col-12">
-            <div id="btn-tipo-captura-1-foto" role="button" class="btn btn-outline-secondary d-block mb-3">
-              <div class="row">
-                <div class="col-auto d-flex align-items-center">
-                  <img src='/assets/img/img-icon.png' alt="" aria-hidden="true" />
-                </div>
-                <div class="col d-flex align-items-center">
-                  <div class="text-start">
-                    <p class="m-0 fw-bold">1 foto</p>
-                    <p class="m-0">Frente e verso</p>
-                  </div>
-                </div>
-                <div class="col-auto d-flex align-items-center">
-                  <img src='/assets/img/chevron-right.png' alt="" aria-hidden="true" />
+        <div class="col-12">
+          <div id="btn-tipo-captura-1-foto" role="button" class="btn btn-outline-secondary d-block mb-3" tabindex="0"
+            onclick="setTypeCapture(1)">
+            <div class="row">
+              <div class="col-auto d-flex align-items-center">
+                <img src='/assets/img/img-icon.png' alt="" aria-hidden="true" />
+              </div>
+              <div class="col d-flex align-items-center">
+                <div class="text-start">
+                  <p class="m-0 fw-bold">1 foto</p>
+                  <p class="m-0">Frente e verso</p>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-12 mb-4">
-            <div id="btn-tipo-captura-2-fotos" role="button" class="btn btn-outline-secondary d-block mb-3">
-              <div class="row">
-                <div class="col-auto d-flex align-items-center">
-                  <img src='/assets/img/img-icon.png' alt="" aria-hidden="true" />
-                </div>
-                <div class="col d-flex align-items-center">
-                  <div class="text-start">
-                    <p class="m-0 fw-bold">2 fotos</p>
-                    <p class="m-0">1 frente e um verso</p>
-                  </div>
-                </div>
-                <div class="col-auto d-flex align-items-center">
-                  <img src='/assets/img/chevron-right.png' alt="" aria-hidden="true" />
-                </div>
+              <div class="col-auto d-flex align-items-center">
+                <img src='/assets/img/chevron-right.png' alt="" aria-hidden="true" />
               </div>
             </div>
           </div>
         </div>
-
+        <div class="col-12 mb-4">
+          <div id="btn-tipo-captura-2-fotos" role="button" class="btn btn-outline-secondary d-block mb-3" tabindex="0"
+            onclick="setTypeCapture(2)">
+            <div class="row">
+              <div class="col-auto d-flex align-items-center">
+                <img src='/assets/img/img-icon.png' alt="" aria-hidden="true" />
+              </div>
+              <div class="col d-flex align-items-center">
+                <div class="text-start">
+                  <p class="m-0 fw-bold">2 fotos</p>
+                  <p class="m-0">1 frente e um verso</p>
+                </div>
+              </div>
+              <div class="col-auto d-flex align-items-center">
+                <img src='/assets/img/chevron-right.png' alt="" aria-hidden="true" />
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="col-12 text-center">
-          <button type="button" id="btn-delete-app-key" class="btn btn-link">
+          <button id="delete-appkey" type="button" class="btn btn-link" onclick="deleteAppKey()">
             Em caso de problemas, clique aqui
           </button>
         </div>
+        <input type="file" id="captura-foto" accept="image/*" capture="camera" aria-hidden="true"
+          style="display: none; pointer-events: none;" />
+        <img id="img-mobile" src="" aria-hidden="true" style="display: none;" />
       </div>
 
-      <!-- Área de captura -->
-      <div>
-        <div id="send-document-area" class="send-document-area wrapping-box-container">
-          <div id="controls" class="control inner">
-            <div id="bg-overlay" class="bgOverlay d-none"></div>
-            <div id="bg-overlay-white" class="bgOverlay white-bg d-none"></div>
+      <div id="send-document">
+        <div id="bg-overlay" class="overlay"></div>
 
-            <div id="camera-rotate" class="cameraRotate d-none">
-              <div class="d-flex align-content-center justify-content-center">
-                <i class="material-icons me-2" aria-hidden="true">flip_camera_android</i>
-                <span>Vire o celular</span>
+        <div class="send-document-area">
+          <div class="container">
+            <div id="div-msg" class="div-msg">
+              <span id="span-msg"></span>
+            </div>
+
+            <video id="video" class="object-fit-contain"></video>
+
+            <div id="thumb-picture" class="thumb-picture">
+              <div id="thumb-group-card" class="thumb-group-card">
+                <p>A foto do documento ficou boa?</p>
+                <div>
+                  <img id="img-camera" src="" alt="" />
+                </div>
               </div>
             </div>
-            <div id="back-container" class="btnBackContainer d-none">
-              <button id="btn-voltar-tipo-captura"
-                class="btn btn-link px-0 d-flex justify-content-end w-100 text-decoration-none btnImage btnBack"
-                aria-label="Fechar">
-                <i class="material-icons" aria-hidden="true">close</i>
+
+            <div id="thumbs-group" class="thumbs-group">
+              <div id="thumb-group-card-multiple" class="thumb-group-card">
+                <p id="send-or-change-pictures"></p>
+
+                <div id="thumb-group-card-captures" class="thumbGroupCard"></div>
+              </div>
+            </div>
+
+            <div id="btn-controllers" class="d-flex btn-controllers">
+              <button type="button" id="snapTick"
+                class="btn btn-primary d-flex align-items-center btnImage fadeIn right mt-2 me-2" onclick="snapTick()">
+                <i class="material-icons me-2" aria-hidden="true">
+                  insert_photo
+                </i>
+                Usar foto
+              </button>
+              <button type="button" id="resetSnap"
+                class="btn btn-primary d-flex align-items-center btnImage fadeIn right mt-2" onclick="resetSnap()">
+                <i class="material-icons me-2" aria-hidden="true">
+                  add_photo_alternate
+                </i>
+                Tirar nova foto
               </button>
             </div>
 
-            <div id="content-video" class="content-video d-none">
-              <div id="container-video" class="containerVideo">
-                <!-- <div id="divMsg">
-                <span id="spanMsg"></span>
-              </div> -->
-                <div id="divLoader" class="d-none">
-                  <div class="progress">
-                    <div id="loader-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated"
-                      role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                    </div>
-                  </div>
-                </div>
-                <div id="overlay" class="overlay d-none"></div>
-                <video id="player" class="d-none"></video>
-                <div id="thumb-picture" class="thumbPicture d-none">
-                  <img id="imgCamera" src="" />
-                </div>
-                <div id="thumbs-group" class="thumbsGroup d-none">
-                  <div id="thumb-group-card" class="thumbGroupCard"></div>
-                </div>
-                <!-- <div id="respUpload" class="respUpload d-none">
-                <span id="uploadResp"></span>
-              </div> -->
-              </div>
-              <div id="btnControllers" class="btnControllers d-flex justify-content-center d-none">
-                <button id="snapTick" class="btn btn-primary d-flex align-items-center btnImage fadeIn left mt-2 me-3">
-                  <i class="material-icons me-2" aria-hidden="true">insert_photo</i>
-                  Usar foto
-                </button>
-                <button id="resetSnap" class="btn btn-primary d-flex align-items-center btnImage fadeIn right mt-2">
-                  <i class="material-icons me-2" aria-hidden="true">add_photo_alternate</i>
-                  Tirar nova foto
-                </button>
-              </div>
-              <div id="divButton" class="btnControllers d-flex justify-content-center d-none">
-                <button id="btnIniciar"
-                  class="btn btn-primary d-flex align-items-center btnImage btnCapture fadeIn d-none mt-2">
-                  <i class="material-icons me-2" aria-hidden="true">camera_alt</i>
-                  Tirar foto
-                </button>
-                <button id="btnEnviar"
-                  class="btn btn-primary d-flex align-items-center btnImage btnUpload fadeIn d-none mt-2" disabled>
-                  <i class="material-icons me-2" aria-hidden="true">outbox</i>
-                  Enviar fotos
-                </button>
-              </div>
+            <div id="div-button" class="d-flex btn-controllers">
+              <button type="button" id="btn-iniciar"
+                class="btn btn-primary d-flex align-items-center btnImage btnCapture fadeIn mt-2 me-2"
+                onclick="startCapture()">
+                <i class="material-icons me-2" aria-hidden="true">
+                  camera_alt
+                </i>
+                Tirar foto
+              </button>
+
+              <button id="btn-enviar" class="btn btn-primary d-flex align-items-center btnImage btnUpload fadeIn mt-2"
+                onclick="uploadPictures()">
+                <i id="btn-enviar-icon" class="material-icons me-2" aria-hidden="true"></i>
+                <span id="btn-enviar-text"></span>
+              </button>
             </div>
           </div>
         </div>
-      </div>
 
-      <canvas id="fc_canvas" style="display: none"></canvas>
+        <canvas id="fc_canvas" style="display: none;"></canvas>
+      </div>
     </div>
   </div>
 </body>
