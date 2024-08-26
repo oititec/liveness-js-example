@@ -1,6 +1,6 @@
 # Versão do SDK da FaceTec em produção:
 
-9.6.91 atualizado em 16/07/2024
+9.7.25 atualizado em 26/08/2024
 
 ---
 
