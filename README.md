@@ -19,7 +19,7 @@ Para visualizar a documentação de cada módulo, utilize os links abaixo:
 
 ### [FaceTec SDK: 9.7.40](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.7.40)
 
-_data: 23/10/2024_
+_data: 09/12/2024_
 
 - Melhorias na taxa de sucesso e compatibilidade de dispositivos.
 - Melhorias de desempenho/velocidade.
