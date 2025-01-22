@@ -17,6 +17,21 @@ Para visualizar a documentação de cada módulo, utilize os links abaixo:
 
 - [Guia rápido de atualização](https://github.com/oititec/liveness-js-example/blob/main/update-guide/README.md)
 
+### [FaceTec SDK: 9.7.45](https://github.com/oititec/liveness-react-example/blob/main/core/9.7.45)
+
+_data: 10/01/2025_
+
+- Não há mudanças drásticas, exceto certas pequenas remoções de APIs obsoletas em diversas APIs secundárias.
+- As atualizações da v9.6.x para a v9.7.x são executadas exatamente como as atualizações da v9.6.x.
+- Consulte o Guia de atualização da versão 9.7 para obter mais informações.
+- Melhorias na taxa de sucesso e na compatibilidade de dispositivos.
+- Melhorias de desempenho/velocidade.
+- Melhorias na precisão do OCR.
+- Atualizar/melhorar modelos oficiais de OCR.
+- Melhorias na estabilidade e no gerenciamento de memória.
+- Melhore a precisão do OCR para a maioria dos tipos de documentos.
+- Melhorias nas verificações de injeção de vídeo do lado do dispositivo e do servidor para mitigar ameaças de IA generativa.
+
 ### [FaceTec SDK: 9.7.40](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.7.40)
 
 _data: 09/12/2024_
