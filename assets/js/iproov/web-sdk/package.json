@@ -1,0 +1,39 @@
+{
+  "_from": "@iproov/web-sdk",
+  "_id": "@iproov/web-sdk@5.4.2",
+  "_inBundle": false,
+  "_integrity": "sha512-42/hwDNXZJZi4ZG7VnkavgwQ0Iu9Kct80uEGGGZuiFUtgX119WxYrj87+QMFy1dhm8hLgx1guCbpR80JoM6V3g==",
+  "_location": "/@iproov/web-sdk",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@iproov/web-sdk",
+    "name": "@iproov/web-sdk",
+    "escapedName": "@iproov%2fweb-sdk",
+    "scope": "@iproov",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@iproov/web-sdk/-/web-sdk-5.4.2.tgz",
+  "_shasum": "a055b0db17422ee4565f95cd622f598e8800da47",
+  "_spec": "@iproov/web-sdk",
+  "_where": "/home/guilherme/Documentos/Demos da Facetec/liveness-js-example",
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "iProov Web SDK",
+  "homepage": "https://github.com/iProov/web",
+  "license": "UNLICENSED",
+  "main": "iProovMe.js",
+  "name": "@iproov/web-sdk",
+  "sideEffects": [
+    "iProovMe.js"
+  ],
+  "version": "5.4.2"
+}

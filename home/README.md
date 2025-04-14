@@ -8,8 +8,11 @@ Atenção: A alteração da estrutura de arquivos do projeto poderá acarretar n
 
 Para rodar o projeto, será necessário publicar os arquivos deste projeto em um servidor local ou remoto pois as APIs necessitam que as origens das requisições sejam realizadas via protocolo HTTP ou HTTPS.
 
+**Observacao: O sdk da Iproov se encontra em um repositório privado, requerindo acesso da equipe da Iproov. [Consulte a documentação da Iproov!](https://github.com/iProov/web)**
+
 ##Para visualização da documentação detalhada de cada processo de Liveness, use os links abaixo
 
 - [Liveness 2D](https://github.com/oititec/liveness-js-example/blob/main/liveness-2d/README.md)
 - [Liveness 3D](https://github.com/oititec/liveness-js-example/blob/main/liveness-3d/README.md)
+- [Liveness 3D Iproov](https://github.com/oititec/liveness-js-example/blob/main/liveness-iproov/README.md)
 - [Envio de documentos](https://github.com/oititec/liveness-js-example/blob/main/send-documents/README.md)
