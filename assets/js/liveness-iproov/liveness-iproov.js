@@ -21,14 +21,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify({ appkey, userAgent })
             });
             const data = await response.json();
-            if (data.token && data.url) {
+            if (data.vendor != 'IPROOV') {
+                statusElement.textContent = 'Parece que os dados recebidos não são compatíveis com este processo. Por favor, entre em contato com nosso suporte.';
+            } else {
                 sessionToken = data.token;
                 iproovUrl = data.url;
                 statusElement.textContent = '';
                 isLoading = false
                 livenessButton.disabled = false;
-            } else {
-                statusElement.textContent = 'Sua appkey é inválida. Por favor, retorne para a home clicando no link no final da tela';
             }
         } catch (error) {
             statusElement.textContent = 'Sua appkey é inválida. Por favor, retorne para a home clicando no link no final da tela';
