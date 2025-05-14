@@ -17,7 +17,22 @@ Para visualizar a documentação de cada módulo, utilize os links abaixo:
 
 - [Guia rápido de atualização](https://github.com/oititec/liveness-js-example/blob/main/update-guide/README.md)
 
-## [Liveness 3D Iproov](https://github.com/oititec/liveness-js-example/blob/main/liveness-iproov/README.md)
+### [FaceTec SDK: 9.7.62](https://github.com/oititec/liveness-react-example/blob/main/core/9.7.62)
+
+_data: 13/05/2025_
+
+- A v9.7 foi lançada! A v9.7 foi implementada em fases e agora está amplamente disponível para todos os Clientes e Parceiros da FaceTec.
+- Não há alterações significativas, exceto algumas pequenas remoções de APIs obsoletas em diversas APIs secundárias.
+- As atualizações da v9.6.x para a v9.7.x são realizadas exatamente como as atualizações da v9.6.x.
+- Melhorias na Taxa de Sucesso e na Compatibilidade de Dispositivos.
+- Melhorias de Desempenho/Velocidade.
+- Melhorias na Precisão do OCR.
+- Atualização/Aprimoramento dos Modelos Oficiais de OCR.
+- Melhorias na Estabilidade e no Gerenciamento de Memória.
+- Aprimoramento da Precisão do OCR para a maioria dos Tipos de Documentos.
+- Melhorias nas Verificações de Injeção de Vídeo do Dispositivo e do Servidor para mitigar Ameaças de IA Generativa.
+
+### [Liveness 3D Iproov](https://github.com/oititec/liveness-js-example/blob/main/liveness-iproov/README.md)
 _data: 10/04/2025_
 - Implementação do Liveness 3D da Iproov no projeto
 - Novo fluxo de autenticação com reconhecimento facial
