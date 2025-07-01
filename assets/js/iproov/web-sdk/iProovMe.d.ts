@@ -3,7 +3,7 @@
  */
 
 // required to declare global
-export { }
+export {}
 
 // option type values
 export type CANVAS_FILTER = "classic" | "clear" | "shaded" | "vibrant" | "blur"

@@ -39,22 +39,24 @@
             <div id="controls" class="controls">
 
 
-              <button id="liveness-button" class="btn btn-primary btn-rounded" disabled = "isLoading">
+              <button id="liveness-button" class="btn btn-primary btn-rounded" disabled = "isLoading"
+              aria-label="Iniciar a validação facial 3D com a câmera">
                 Iniciar Validacao Iproov</button>
 
+              <p id="status" class="mt-2" aria-live="assertive"></p>
+              <h3 id="statusRequest" className="mt-2" aria-live="polite"></h3>
               <div id="certiface-iproov"></div>
 
-              <p id="status" class="mt-2"></p>
-              <h3 id="statusRequest" className="mt-2"></h3>
               <hr />
               <div id="custom-logo-container">
-                <img src="../assets/img/Iproov_Logo.png" alt="Logo Iproov" />
+                <img src="../assets/img/Iproov_Logo.png" alt="Logotipo da solução de validação facial da Iproov"" />
               </div>
             </div>
           </div>
         </div>
         <div class="col-12 text-center">
-          <button id="btn-delete-app-key" type="button" class="btn btn-link">
+          <button id="btn-delete-app-key" type="button" class="btn btn-link" 
+            aria-label="Clique aqui se estiver com problemas. Isso removerá sua AppKey.">
             Em caso de problemas, clique aqui
           </button>
         </div>
