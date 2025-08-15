@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     let sessionToken = null;
     let iproovUrl = null;
+    let livenessType = null;
     let isLoading = true;
 
     const baseUrl = `${SERVER_API_URL}/facecaptcha/service/captcha/3d`
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 sessionToken = data.token;
                 iproovUrl = data.url;
+                livenessType = data.livenessType
                 statusElement.textContent = '';
                 isLoading = false
                 livenessButton.disabled = false;
@@ -45,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         livenessIproov.setAttribute('token', sessionToken);
         livenessIproov.setAttribute('base_url', `https://${iproovUrl}`);
-        livenessIproov.setAttribute('filter', 'classic')
+        livenessIproov.setAttribute('filter', livenessType == 'LA' ? 'clear' : 'classic');
 
         await getLanguage().then(language => {
         if (language) {
