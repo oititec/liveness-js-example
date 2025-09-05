@@ -74,8 +74,7 @@ const initialEvents = (event) => {
   }
 
   if (!appkey) {
-    btnTipoCaptura1foto.classList.add("disabled");
-    btnTipoCaptura2fotos.classList.add("disabled");
+    btnEnviarArquivo.classList.add("disabled");
   }
 };
 
@@ -746,7 +745,7 @@ const sendDigitalCNH = async () => {
         changeEvents();
       }, 1000);
 
-      window.alert("QRCode enviado com sucesso");
+      window.alert("Arquivo enviado com sucesso!");
 
       window.localStorage.removeItem("appkey");
 
@@ -758,7 +757,7 @@ const sendDigitalCNH = async () => {
       setTimeout(() => {
         isLoaded = false;
 
-        window.alert("QRCode não localizado! Por favor reenvie o documento.");
+        window.alert("Arquivo inválido! Por favor, reenvie o documento.");
 
         window.location.reload();
       }, 1000);
