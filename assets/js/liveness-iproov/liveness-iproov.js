@@ -267,10 +267,10 @@ document.addEventListener("DOMContentLoaded", () => {
           const data = await response.json(); 
           switch (iproovStatus) {
             case 'passed':
-                if (data.valid) {
-                    statusRequestElement.textContent = 'Enviado com sucesso';
-                } else {
+                if (data.codID === 300.1 || data.codID === 300.2) {
                     statusRequestElement.textContent = 'Prova de Vida reprovada. Insira uma nova appkey e tente novamente.';
+                } else {
+                    statusRequestElement.textContent = 'Enviado com sucesso';
                 }
               break;
             case 'failed':
