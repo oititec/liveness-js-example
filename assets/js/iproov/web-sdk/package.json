@@ -1,7 +1,7 @@
 {
   "name": "@iproov/web-sdk",
   "description": "iProov Web SDK",
-  "version": "5.4.4",
+  "version": "5.5.0",
   "homepage": "https://github.com/iProov/web",
   "main": "iProovMe.js",
   "license": "UNLICENSED",
