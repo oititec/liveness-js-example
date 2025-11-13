@@ -17,6 +17,13 @@ Para visualizar a documentação de cada módulo, utilize os links abaixo:
 
 - [Guia rápido de atualização](https://github.com/oititec/liveness-js-example/blob/main/update-guide/README.md)
 
+### [Iproov SDK: 5.5.0](https://github.com/oititec/liveness-js-example/blob/main/src/app/iproov/README.md)
+
+_data: 04/11/2025_
+- Melhorias de segurança
+- Ajustes para alguns problemas de câmera específicos com o navegador Chrome no desktop
+- [Consulte também a documentação da Iproov](https://github.com/iProov/web)
+
 ### [FaceTec SDK: 9.7.89](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.7.89)
 
 _data: 10/11/2025_
@@ -32,6 +39,7 @@ _data: 10/11/2025_
 - Aprimoramento da precisão do OCR para a maioria dos tipos de documentos.
 - Aprimoramentos nas verificações de injeção de vídeo no dispositivo e no servidor para mitigar ameaças de IA generativa.
 - Impõe um esquema de cores opaco para todos os elementos da interface do usuário/experiência do usuário da FaceTec, exceto a sobreposição externa.
+
 
 _data: 20/10/2025_
 - A versão 9.7 foi lançada! A versão 9.7 foi implementada em fases e agora está amplamente disponível para todos os clientes e parceiros da FaceTec.
