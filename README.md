@@ -22,7 +22,7 @@ Para visualizar a documentação de cada módulo, utilize os links abaixo:
 _data: 25/11/2025_
 
 - Exibição das mensagens de falha e erros do SDK da iProov para mais acertividade
-- Mais orientações inicias ao usuários
+- Mais orientações iniciais ao usuários
 - Consulte a documentação completa da implementação do Liveness 3D no link acima
 - [Consulte também a documentação da Iproov](https://github.com/iProov/web)
 
