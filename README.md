@@ -33,7 +33,15 @@ _data: 04/11/2025_
 - Ajustes para alguns problemas de câmera específicos com o navegador Chrome no desktop
 - [Consulte também a documentação da Iproov](https://github.com/iProov/web)
 
-### [FaceTec SDK: 9.7.93](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.7.93)
+### [FaceTec SDK: 9.7.100](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.7.100)
+
+_data: 22/01/2026_
+- Melhorias nas verificações de injeção de vídeo no dispositivo e no servidor para mitigar ameaças de IA generativa.
+- Melhorias na taxa de sucesso e na compatibilidade com dispositivos.
+- Melhorias no desempenho/velocidade.
+- Melhorias na precisão do OCR.
+- Atualização/aprimoramento dos modelos oficiais de OCR.
+- Aprimoramento da precisão do OCR para a maioria dos tipos de documentos.
 
 _data: 08/12/2025_
 - A versão 9.7 foi lançada! A versão 9.7 foi implementada em fases e agora está amplamente disponível para todos os clientes e parceiros da FaceTec.
