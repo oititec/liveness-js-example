@@ -5,6 +5,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 29.01.2026 6.0.2
+
+## Fixed
+
+- **Camera Permission Denied**: Fixed a bug introduced in v6.0.0 where an `error` event with the feedback `integration_unloaded` was dispatched before the `permission_denied` event. This occurred when the SDK was loaded after camera permission had already been denied.
+- **Compatibility**: Fixed a compatibility issue with web pages overriding the fetch API.
+- **Failed Slot**: Fixed a potential error when custom `failed` slot content is missing the `.iproov-lang-term` element.
+
+## 24.11.2025 6.0.1
+
+## Added
+
+- **Compatibility**: Edge case browser support for iframe integrations.
+
+## 12.12.2025 5.5.1
+
+## Fixed
+
+- **Compatibility**: Fixed a compatibility issue with web pages overriding the fetch API.
+- **Compatibility**: Edge case browser support for iframe integrations (same as v5.4.5).
+
+## 5.11.2025 6.0.0
+
+## Changed
+
+- **Security**: Security of the Web SDK has been improved.
+- **Feedback Codes**: All feedback codes have been updated to provide a list of reasons for each event. Each "Reason" contains a `localized_description` and, depending on the object type, may also include a `feedback_code` (replacing the old `feedback` attribute). [See behavior documentation for more information](https://github.com/iProov/web#events).
+- **Failed Event**: The `failed` event can now return up to three reasons for failure, instead of just one. All other events will contain one or fewer reasons. The `failed` slot now displays an unordered list (`ul`) of reasons.
+- **Safari/iOS/iPadOS Support**: The Web SDK now requires Safari/iOS/iPadOS version 15.2 or above and has been optimized accordingly.
+- **Bundle size**: The size of the Web SDK has been reduced by about 340KB (or 140KB gzipped).
+- **Screen Orientation During Scan**: Any change in orientation during a scan now results in an error.
+- **Landscape Orientation in Express Liveness**: Landscape orientation in Express on mobile devices is now blocked.
+
+## Fixed
+
+- **Firefox for Android**: Fixed a bug introduced in v5.5.0 that prevented access to the camera.
+
 ## 10.09.2025 5.5.0
 
 ## Added
@@ -14,6 +51,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Fixed
 
 - **Camera access**: Fix some camera selection issues with Chrome on desktop.
+
+## 24.11.2025 5.4.5
+
+## Added
+
+- **Compatibility**: Edge case browser support for iframe integrations.
 
 ## 15.05.2025 5.4.4
 

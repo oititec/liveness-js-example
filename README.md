@@ -17,6 +17,14 @@ Para visualizar a documentação de cada módulo, utilize os links abaixo:
 
 - [Guia rápido de atualização](https://github.com/oititec/liveness-js-example/blob/main/update-guide/README.md)
 
+### [Iproov SDK: 6.0.2](https://github.com/oititec/liveness-js-example/blob/main/liveness-iproov/README.md)
+
+_data: 11/03/2026_
+
+- Corrigido um bug introduzido na versão 6.0.0, em que um evento error com o feedback integration_unloaded era disparado antes do evento permission_denied. Isso ocorria quando o SDK era carregado após a permissão da câmera já ter sido negada.
+-Corrigido um problema de compatibilidade com páginas web que substituíam a API fetch.
+- [Consulte também a documentação da Iproov](https://github.com/iProov/web)
+
 ### [Liveness 3D Iproov](https://github.com/oititec/liveness-js-example/blob/main/liveness-iproov/README.md)
 
 _data: 25/11/2025_
