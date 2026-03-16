@@ -41,7 +41,15 @@ _data: 04/11/2025_
 - Ajustes para alguns problemas de câmera específicos com o navegador Chrome no desktop
 - [Consulte também a documentação da Iproov](https://github.com/iProov/web)
 
-### [FaceTec SDK: 9.7.100](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.7.100)
+### [FaceTec SDK: 9.7.109](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.7.109)
+
+_data: 16/03/2026_
+- Melhorias nas Verificações de Injeção de Vídeo no Lado do Dispositivo e no Lado do Servidor para mitigar Ameaças de IA Generativa.
+- Melhorias na Taxa de Sucesso e Compatibilidade com Dispositivos.
+- Melhorias no Desempenho/Velocidade.
+- Melhorias na Precisão do OCR (Reconhecimento Óptico de Caracteres).
+- Atualização/Melhora dos Modelos Oficiais de OCR.
+- Melhorar a Precisão do OCR para a maioria dos Tipos de Documento.
 
 _data: 22/01/2026_
 - Melhorias nas verificações de injeção de vídeo no dispositivo e no servidor para mitigar ameaças de IA generativa.
