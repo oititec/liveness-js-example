@@ -243,6 +243,10 @@
   padding: 0;
 }
 
+.logo {
+  width: 150px;
+}
+
 @media (min-width: 576px) {
   .modal-sm {
     --bs-modal-width: 446px;
