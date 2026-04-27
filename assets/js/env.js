@@ -1,5 +1,6 @@
 const env = (function () {
-  let BASE_URL = 'https://hml.certiface.com.br';
+  // let BASE_URL = 'https://hml.certiface.com.br';
+  let BASE_URL = 'http://localhost:8080';
   let DeviceKeyIdentifier = 'dF2CabwQ6OCLFJaV2QqZhP7OUErHv0uz';
   let PublicFaceScanEncryptionKey =
     '-----BEGIN PUBLIC KEY-----\n' +
