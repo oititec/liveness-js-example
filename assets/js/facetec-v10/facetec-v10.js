@@ -18,7 +18,7 @@ async function init() {
   SampleAppUtilities.formatUIForDevice();
 
   await loadScript(
-    "/assets/js/10.0.42/core-sdk-optional/FaceTecStrings.pt-br.js"
+    "/assets/js/core-sdk-v10/core-sdk-optional/FaceTecStrings.pt-br.js"
   );
 
   facetecStrings =
@@ -58,11 +58,11 @@ function deleteAppKey() {
 
 function initializeFaceTecSDK() {
   sdk.setResourceDirectory(
-    "/assets/js/10.0.42/core-sdk/FaceTecSDK.js/resources"
+    "/assets/js/core-sdk-v10/core-sdk/FaceTecSDK.js/resources"
   );
 
   sdk.setImagesDirectory(
-    "/assets/js/10.0.42/core-sdk/FaceTec_images"
+    "/assets/js/core-sdk-v10/core-sdk/FaceTec_images"
   );
 
   sdk.initializeWithSessionRequest(
@@ -144,7 +144,7 @@ async function loadFaceTecV10() {
   window.FaceTecSDK = undefined;
 
   await loadScript(
-    "/assets/js/10.0.42/core-sdk/FaceTecSDK.js/FaceTecSDK.js"
+    "/assets/js/core-sdk-v10/core-sdk/FaceTecSDK.js/FaceTecSDK.js"
   );
 
   if (!window.FaceTecSDK) {

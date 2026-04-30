@@ -3,7 +3,7 @@ var Config = (function () {
     var DeviceKeyIdentifier = 'dF2CabwQ6OCLFJaV2QqZhP7OUErHv0uz';
 
     function retrieveConfigurationWizardCustomization(FaceTecSDK) {
-        var sdkImageDirectory = "/assets/js/10.0.42/core-sdk/FaceTec_images/";
+        var sdkImageDirectory = "/assets/js/core-sdk-v10/core-sdk/FaceTec_images/";
 
         // For Color Customization
         var outerBackgroundColor = "#ffffff";

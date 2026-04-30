@@ -236,7 +236,7 @@
         );
 
         currentCustomization.orientationScreenCustomization
-          .iconImage = "/assets/js/10.0.42/core-sdk/FaceTec_images/FaceTec_rotate.png";
+          .iconImage = "/assets/js/core-sdk-v10/core-sdk/FaceTec_images/FaceTec_rotate.png";
       }
 
       return currentCustomization;
