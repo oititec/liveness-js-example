@@ -15,8 +15,8 @@ Você será direcionado para a tela abaixo:
 Você terá os seguintes itens no menu:
 
 - [Liveness 2D](https://github.com/oititec/liveness-js-example/blob/main/liveness-2d/README.md)
-- [Liveness 3D](https://github.com/oititec/liveness-js-example/blob/main/liveness-3d/README.md)
-- [Liveness 3D Facetec v10](https://github.com/oititec/liveness-js-example/facetec-v10/README.md)
+- [Liveness 3D Facetec v9](https://github.com/oititec/liveness-js-example/blob/main/liveness-3d/README.md)
+- [Liveness 3D Facetec v10](https://github.com/oititec/liveness-js-example/blob/main/facetec-v10/README.md)
 - [Liveness 3D Iproov](https://github.com/oititec/liveness-js-example/blob/main/liveness-iproov/README.md)
 - [Envio de documentos](https://github.com/oititec/liveness-js-example/blob/main/send-documents/README.md) - Este último só estará disponível ao finalizar um do processos de Liveness
 
@@ -38,7 +38,7 @@ Ao inicializar o componente, os seguintes métodos são acionados:
 | formatUIForDevice() | Identifica o tipo de dispositivo e ajusta a disposição dos elementos na tela |
 | loadFaceTecV10() e loadScript | Carregam dinamicamente o SDK da FaceTec no contexto da aplicação |
 |initializeFaceTecSDK()| Carregam dinamicamente o SDK da FaceTec no contexto da aplicação |
-|onInitializationSuccess()| CEm caso de sucesso, configura localização, tema e prepara a interface para o Liveness 3D. Exibe a mensagem "Inicializado com sucesso" e habilita o botão de validação |
+|onInitializationSuccess()| Em caso de sucesso, configura localização, tema e prepara a interface para o Liveness 3D. Exibe a mensagem "Inicializado com sucesso" e habilita o botão de validação |
 |onInitializationFailure()| Em caso de falha, registra um erro detalhado no console e exibe uma mensagem ao usuário |
 
 #### Execução do Liveness
