@@ -1,0 +1,466 @@
+{"templates": [
+  {
+    "templateTypeDisplayLabel": "ACH Payment",
+    "fields": [[
+      {
+        "fieldKey": "NameOfAccountHolder",
+        "fieldDisplayLabel": "Name of Account Holder"
+      },
+      {
+        "fieldKey": "RoutingABANumber",
+        "fieldDisplayLabel": "Routing/ABA Number"
+      },
+      {
+        "fieldKey": "AccountNumber",
+        "fieldDisplayLabel": "Account Number"
+      },
+      {
+        "fieldKey": "AccountType",
+        "fieldDisplayLabel": "Account Type"
+      }
+    ]],
+    "templateKey": "ACHPayment"
+  },
+  {
+    "templateTypeDisplayLabel": "Basic Identification",
+    "fields": [[
+      {
+        "fieldKey": "FullName",
+        "fieldDisplayLabel": "Full Name"
+      },
+      {
+        "fieldKey": "City",
+        "fieldDisplayLabel": "City"
+      },
+      {
+        "fieldKey": "County",
+        "fieldDisplayLabel": "County"
+      },
+      {
+        "fieldKey": "State",
+        "fieldDisplayLabel": "State"
+      },
+      {
+        "fieldKey": "PhoneNumber",
+        "fieldDisplayLabel": "Phone Number"
+      }
+    ]],
+    "templateKey": "BasicIdentification"
+  },
+  {
+    "templateTypeDisplayLabel": "Business Card",
+    "fields": [[
+      {
+        "fieldKey": "FullName",
+        "fieldDisplayLabel": "Full Name"
+      },
+      {
+        "fieldKey": "Employer",
+        "fieldDisplayLabel": "Employer"
+      },
+      {
+        "fieldKey": "Title",
+        "fieldDisplayLabel": "Title"
+      },
+      {
+        "fieldKey": "Email",
+        "fieldDisplayLabel": "Email"
+      },
+      {
+        "fieldKey": "PhoneNumber",
+        "fieldDisplayLabel": "Phone Number"
+      }
+    ]],
+    "templateKey": "BusinessCard"
+  },
+  {
+    "templateTypeDisplayLabel": "Credit Card",
+    "fields": [[
+      {
+        "fieldKey": "CardholderName",
+        "fieldDisplayLabel": "Cardholder"
+      },
+      {
+        "fieldKey": "CardNumber",
+        "fieldDisplayLabel": "Card Number"
+      },
+      {
+        "fieldKey": "ExpirationDate",
+        "fieldDisplayLabel": "Expires"
+      },
+      {
+        "fieldKey": "CVV",
+        "fieldDisplayLabel": "CVV"
+      }
+    ]],
+    "templateKey": "CreditCard"
+  },
+  {
+    "templateTypeDisplayLabel": "Crypto Wallet",
+    "fields": [[{
+      "fieldKey": "WalletAddress",
+      "fieldDisplayLabel": "Wallet Address"
+    }]],
+    "templateKey": "CryptoWallet"
+  },
+  {
+    "templateTypeDisplayLabel": "Drivers License",
+    "fields": [[
+      {
+        "fieldKey": "FullName",
+        "fieldDisplayLabel": "Name"
+      },
+      {
+        "fieldKey": "DateOfBirth",
+        "fieldDisplayLabel": "DOB"
+      },
+      {
+        "fieldKey": "DriversLicenseNumber",
+        "fieldDisplayLabel": "DL#"
+      },
+      {
+        "fieldKey": "Height",
+        "fieldDisplayLabel": "Ht"
+      },
+      {
+        "fieldKey": "Weight",
+        "fieldDisplayLabel": "Wt"
+      },
+      {
+        "fieldKey": "EyeColor",
+        "fieldDisplayLabel": "Eyes"
+      },
+      {
+        "fieldKey": "HairColor",
+        "fieldDisplayLabel": "Hair"
+      },
+      {
+        "fieldKey": "IssueDate",
+        "fieldDisplayLabel": "Issued"
+      },
+      {
+        "fieldKey": "ExpirationDate",
+        "fieldDisplayLabel": "Expires"
+      },
+      {
+        "fieldKey": "State",
+        "fieldDisplayLabel": "State"
+      },
+      {
+        "fieldKey": "Country",
+        "fieldDisplayLabel": "Country"
+      },
+      {
+        "fieldKey": "Sex",
+        "fieldDisplayLabel": "Gender"
+      }
+    ]],
+    "templateKey": "DriversLicense"
+  },
+  {
+    "templateTypeDisplayLabel": "First Responder ID Card",
+    "fields": [[
+      {
+        "fieldKey": "FullName",
+        "fieldDisplayLabel": "Full Name"
+      },
+      {
+        "fieldKey": "BadgeNumber",
+        "fieldDisplayLabel": "Badge/ID #"
+      },
+      {
+        "fieldKey": "Rank",
+        "fieldDisplayLabel": "Rank"
+      },
+      {
+        "fieldKey": "County",
+        "fieldDisplayLabel": "County"
+      },
+      {
+        "fieldKey": "City",
+        "fieldDisplayLabel": "City"
+      },
+      {
+        "fieldKey": "State",
+        "fieldDisplayLabel": "State"
+      },
+      {
+        "fieldKey": "ExpirationDate",
+        "fieldDisplayLabel": "Expiration Date"
+      }
+    ]],
+    "templateKey": "FirstResponderIDCard"
+  },
+  {
+    "templateTypeDisplayLabel": "Law Enforcement ID Card",
+    "fields": [[
+      {
+        "fieldKey": "FullName",
+        "fieldDisplayLabel": "Full Name"
+      },
+      {
+        "fieldKey": "BadgeNumber",
+        "fieldDisplayLabel": "Badge/ID #"
+      },
+      {
+        "fieldKey": "Rank",
+        "fieldDisplayLabel": "Rank"
+      },
+      {
+        "fieldKey": "City",
+        "fieldDisplayLabel": "City"
+      },
+      {
+        "fieldKey": "County",
+        "fieldDisplayLabel": "County"
+      },
+      {
+        "fieldKey": "State",
+        "fieldDisplayLabel": "State"
+      },
+      {
+        "fieldKey": "ExpirationDate",
+        "fieldDisplayLabel": "Expiration Date"
+      }
+    ]],
+    "templateKey": "LawEnforcementIDCard"
+  },
+  {
+    "templateTypeDisplayLabel": "Law Enforcement Training Card",
+    "fields": [[
+      {
+        "fieldKey": "Type",
+        "fieldDisplayLabel": "Card Type"
+      },
+      {
+        "fieldKey": "FullName",
+        "fieldDisplayLabel": "Name"
+      },
+      {
+        "fieldKey": "DateOfBirth",
+        "fieldDisplayLabel": "DOB"
+      },
+      {
+        "fieldKey": "Position",
+        "fieldDisplayLabel": "Position"
+      },
+      {
+        "fieldKey": "Status",
+        "fieldDisplayLabel": "Status"
+      },
+      {
+        "fieldKey": "ExpirationDate",
+        "fieldDisplayLabel": "Expiration Date"
+      }
+    ]],
+    "templateKey": "LawEnforcementTrainingCard"
+  },
+  {
+    "templateTypeDisplayLabel": "Married Couple",
+    "fields": [
+      [
+        {
+          "fieldKey": "Spouse1FirstName",
+          "fieldDisplayLabel": "Spouse 1 First Name"
+        },
+        {
+          "fieldKey": "Spouse1LastName",
+          "fieldDisplayLabel": "Spouse 1 Last Name"
+        },
+        {
+          "fieldKey": "DateOfBirth",
+          "fieldDisplayLabel": "DOB"
+        },
+        {
+          "fieldKey": "MarriageDate",
+          "fieldDisplayLabel": "Marriage Date"
+        },
+        {
+          "fieldKey": "LicenseNumber",
+          "fieldDisplayLabel": "License Number"
+        },
+        {
+          "fieldKey": "LicenseState",
+          "fieldDisplayLabel": "License State"
+        }
+      ],
+      [
+        {
+          "fieldKey": "Spouse2FirstName",
+          "fieldDisplayLabel": "Spouse 2 First Name"
+        },
+        {
+          "fieldKey": "Spouse2LastName",
+          "fieldDisplayLabel": "Spouse 2 Last Name"
+        },
+        {
+          "fieldKey": "DateOfBirth",
+          "fieldDisplayLabel": "DOB"
+        }
+      ]
+    ],
+    "templateKey": "MarriedCouple"
+  },
+  {
+    "templateTypeDisplayLabel": "Parent Child",
+    "fields": [
+      [
+        {
+          "fieldKey": "ParentFirstName",
+          "fieldDisplayLabel": "Parent First Name"
+        },
+        {
+          "fieldKey": "ParentLastName",
+          "fieldDisplayLabel": "Parent Last Name"
+        },
+        {
+          "fieldKey": "AgeInYears",
+          "fieldDisplayLabel": "Age"
+        },
+        {
+          "fieldKey": "CountryOfResidence",
+          "fieldDisplayLabel": "Country Of Residence"
+        }
+      ],
+      [
+        {
+          "fieldKey": "ChildFirstName",
+          "fieldDisplayLabel": "Child First Name"
+        },
+        {
+          "fieldKey": "ChildLastName",
+          "fieldDisplayLabel": "Child Last Name"
+        },
+        {
+          "fieldKey": "AgeInYears",
+          "fieldDisplayLabel": "Age"
+        }
+      ]
+    ],
+    "templateKey": "ParentChild"
+  },
+  {
+    "templateTypeDisplayLabel": "Passport",
+    "fields": [[
+      {
+        "fieldKey": "FullName",
+        "fieldDisplayLabel": "Full Name"
+      },
+      {
+        "fieldKey": "PassportNumber",
+        "fieldDisplayLabel": "Passport #"
+      },
+      {
+        "fieldKey": "Nationality",
+        "fieldDisplayLabel": "Nationality"
+      },
+      {
+        "fieldKey": "DateOfBirth",
+        "fieldDisplayLabel": "DOB"
+      },
+      {
+        "fieldKey": "PlaceOfBirth",
+        "fieldDisplayLabel": "Place Of Birth"
+      },
+      {
+        "fieldKey": "Sex",
+        "fieldDisplayLabel": "Sex/Gender"
+      },
+      {
+        "fieldKey": "IssueDate",
+        "fieldDisplayLabel": "Issue Date"
+      },
+      {
+        "fieldKey": "ExpirationDate",
+        "fieldDisplayLabel": "Expiration Date"
+      },
+      {
+        "fieldKey": "IssuingAuthority",
+        "fieldDisplayLabel": "Issuing Authority"
+      }
+    ]],
+    "templateKey": "Passport"
+  },
+  {
+    "templateTypeDisplayLabel": "Student Identification Card",
+    "fields": [[
+      {
+        "fieldKey": "InstitutionName",
+        "fieldDisplayLabel": "Institution Name"
+      },
+      {
+        "fieldKey": "StudentName",
+        "fieldDisplayLabel": "Student Name"
+      },
+      {
+        "fieldKey": "DateOfBirth",
+        "fieldDisplayLabel": "DOB"
+      },
+      {
+        "fieldKey": "ExpirationDate",
+        "fieldDisplayLabel": "Expiration Date"
+      },
+      {
+        "fieldKey": "IDNumber",
+        "fieldDisplayLabel": "ID Number"
+      }
+    ]],
+    "templateKey": "StudentIdentificationCard"
+  },
+  {
+    "templateTypeDisplayLabel": "Three Person",
+    "fields": [
+      [
+        {
+          "fieldKey": "FirstName",
+          "fieldDisplayLabel": "First Name"
+        },
+        {
+          "fieldKey": "LastName",
+          "fieldDisplayLabel": "Last Name"
+        },
+        {
+          "fieldKey": "DateOfBirth",
+          "fieldDisplayLabel": "DOB"
+        },
+        {
+          "fieldKey": "RelationshipToPerson2",
+          "fieldDisplayLabel": "Relationship To Person 2"
+        }
+      ],
+      [
+        {
+          "fieldKey": "FirstName",
+          "fieldDisplayLabel": "First Name"
+        },
+        {
+          "fieldKey": "LastName",
+          "fieldDisplayLabel": "Last Name"
+        },
+        {
+          "fieldKey": "DateOfBirth",
+          "fieldDisplayLabel": "DOB"
+        },
+        {
+          "fieldKey": "RelationshipToPerson3",
+          "fieldDisplayLabel": "Relationship To Person 3"
+        }
+      ],
+      [
+        {
+          "fieldKey": "FirstName",
+          "fieldDisplayLabel": "First Name"
+        },
+        {
+          "fieldKey": "LastName",
+          "fieldDisplayLabel": "Last Name"
+        },
+        {
+          "fieldKey": "DateOfBirth",
+          "fieldDisplayLabel": "DOB"
+        }
+      ]
+    ],
+    "templateKey": "ThreePerson"
+  }
+]}
