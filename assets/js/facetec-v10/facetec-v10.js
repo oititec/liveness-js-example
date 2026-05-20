@@ -110,7 +110,7 @@ function onInitializationFailure(initializationError) {
       DeveloperStatusMessages.displayMessage("Dispositivo não suportado");
       break;
     case 3:
-      DeveloperStatusMessages.displayMessage("Erro interno");
+      DeveloperStatusMessages.displayMessage("Ocorreu um erro inesperado");
       break;
     case 4:
       DeveloperStatusMessages.displayMessage("Falha ao carregar recursos na inicialização");
