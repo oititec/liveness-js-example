@@ -69,31 +69,20 @@ Estas são as mensagens de falha retornadas pelo SDK da iProov. Falhas originam 
 
 **Mensagens de falha:**
 
-- Falhou
-
-- Mantenha seus olhos abertos
-
-- Afaste seu rosto da tela
-
-- Aproxime seu rosto da tela
-
-- Mantenha seu rosto no oval
-
-- Certifique-se de que apenas uma pessoa esteja visível
-
-- Desculpe, problema de rede
-
-- Remova qualquer cobertura do rosto
-
-- Remova os óculos de sol
-
-- Vá para algum lugar mais escuro
-
-- Vá para algum lugar mais iluminado
-
-- Fique parado
-
-- Tente novamente
+- Por favor, tente novamente!
+- Alinhe seu rosto no oval e tente manter a posição!
+- Mantenha o rosto visível e remova acessórios que possam cobri-lo!
+- Por favor, remova seus óculos!
+- Certifique-se que haja apenas uma pessoa visível!
+- Mantenha os olhos abertos!
+- Mantenha seu rosto iluminado e evite brilho excessivo!
+- Evite se movimentar e mantenha seu rosto dentro do oval!
+- Por favor, tente em outro navegador ou dispositivo!
+- Por favor, desloque-se para um local sem movimento ao fundo!
+- Por favor, tente novamente em outro ambiente!
+- Erro interno ao processar a validação
+- A validação não pode ser concluída
+- A operação excedeu o tempo limite de resposta
 
 #### Erros:
 
