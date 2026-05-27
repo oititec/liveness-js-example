@@ -7,14 +7,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const baseUrl = `${SERVER_API_URL}/facecaptcha/service/captcha/3d`
     const statusElement = document.getElementById('status');
     const statusRequestElement = document.getElementById('statusRequest');
+    let userFeedbackElement = document.getElementById('userFeedback');
+
     const livenessButton = document.getElementById('liveness-button');
     let btnDeleteAppKey = document.getElementById('btn-delete-app-key');
     const certifaceContainer = document.getElementById('certiface-iproov');
-    
+
     async function fetchSessionData() {
         const appkey = localStorage.getItem('appkey');
         const userAgent = navigator.userAgent;
-        
+
         try {
             const response = await fetch(baseUrl.concat('/session-token'), {
                 method: 'POST',
@@ -50,15 +52,15 @@ document.addEventListener("DOMContentLoaded", () => {
         livenessIproov.setAttribute('filter', livenessType == 'LA' ? 'clear' : 'classic');
 
         await getLanguage().then(language => {
-        if (language) {
-            livenessIproov.setAttribute("language", JSON.stringify(language))
-        }
+            if (language) {
+                livenessIproov.setAttribute("language", JSON.stringify(language))
+            }
         });
 
         livenessIproov.setAttribute('role', 'application');
         livenessIproov.setAttribute('aria_live', 'assertive');
         livenessIproov.setAttribute('aria-label', 'Validação facial 3D com câmera');
-        
+
         const slots = `
          <div slot="grant_permission" class="w-full px-10 pt-6" aria-live="polite">
                         <div class="items-center gap-4 p-6 md:p-4 lg:p-0">
@@ -235,22 +237,22 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </div>
          `
-        
+
         livenessIproov.innerHTML = slots
 
         livenessIproov.addEventListener("error", (event) => {
-        ELEMENTS_TO_HIDE_IN_FS.forEach((el) => el.setAttribute("aria-hidden", "true"))
-        statusRequestElement.textContent = event.detail.reason
+            ELEMENTS_TO_HIDE_IN_FS.forEach((el) => el.setAttribute("aria-hidden", "true"))
+            statusRequestElement.textContent = event.reasons
         })
 
         livenessIproov.addEventListener('passed', (event) => {
-        ELEMENTS_TO_HIDE_IN_FS.forEach((el) => el.removeAttribute("aria-hidden"))
-        sendLivenessValidation(appkey, sessionToken, event)
+            ELEMENTS_TO_HIDE_IN_FS.forEach((el) => el.removeAttribute("aria-hidden"))
+            sendLivenessValidation(appkey, sessionToken, event)
         });
 
         livenessIproov.addEventListener('failed', (event) => {
-        ELEMENTS_TO_HIDE_IN_FS.forEach((el) => el.removeAttribute("aria-hidden"))
-        sendLivenessValidation(appkey, sessionToken, event)
+            ELEMENTS_TO_HIDE_IN_FS.forEach((el) => el.removeAttribute("aria-hidden"))
+            sendLivenessValidation(appkey, sessionToken, event)
         });
 
         certifaceContainer?.appendChild(livenessIproov);
@@ -261,47 +263,61 @@ document.addEventListener("DOMContentLoaded", () => {
     const sendLivenessValidation = (appkey, sessionToken, event) => {
         statusRequestElement.textContent = 'Enviando...';
         fetch(baseUrl.concat('/liveness'), {
-          method: 'POST',
-          body: JSON.stringify({ appkey, sessionToken }),
-          headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            body: JSON.stringify({ appkey, sessionToken }),
+            headers: { 'Content-Type': 'application/json' },
         })
-        .then(async response => {
-          const data = await response.json(); 
-          switch (event.type) {
-            case 'passed':
-                if (data.codID === 300.1){
-                    checkLivenessRetry(data, 'Vamos tentar outra vez! '
-                        .concat('Escolha um ambiente bem iluminado e mantenha a câmera firme!'));
-                } else if (data.codID === 300.2) {
-                    statusRequestElement.textContent = 'Prova de Vida reprovada. Insira uma nova appkey e tente novamente.';
-                } else {
-                    statusRequestElement.textContent = 'Enviado com sucesso';
+            .then(async response => {
+                const data = await response.json();
+                switch (event.type) {
+                    case 'passed':
+                        if (data.codID === 300.1) {
+                            checkLivenessRetry(data);
+                        } else if (data.codID === 300.2) {
+                            statusRequestElement.textContent = 'Prova de Vida reprovada. Insira uma nova appkey e tente novamente.';
+                        } else {
+                            statusRequestElement.textContent = 'Enviado com sucesso';
+                        }
+                        break;
+                    case 'failed':
+                        checkLivenessRetry(data)
+                        break;
                 }
-                break;
-            case 'failed':
-                checkLivenessRetry(data, !event.detail.reason ? data.reason : event.detail.reason)
-                break;
-          }
-        })
-        .catch(error => {
-            statusRequestElement.textContent = 'Erro ao enviar';
-            console.log(error);
-        });
-    
-        localStorage.setItem('hasLiveness', 'true');
-      };
+            })
+            .catch(error => {
+                statusRequestElement.textContent = 'Erro ao enviar';
+                console.log(error);
+            });
 
-    const checkLivenessRetry = (data, reason) => {
+        localStorage.setItem('hasLiveness', 'true');
+    };
+
+    const checkLivenessRetry = (data) => {
         if (data.retry) {
-            statusRequestElement.textContent = reason
+            statusRequestElement.textContent = null;
+            if (Array.isArray(data.userFeedback) && data.userFeedback.length > 0) {
+                data.userFeedback.forEach(guidance => {
+                    const li = document.createElement("li");
+
+                    const h5 = document.createElement("h5");
+                    h5.className = "text-left";
+                    h5.textContent = guidance;
+
+                    li.appendChild(h5);
+                    userFeedbackElement.appendChild(li);
+                });
+            } else {
+                statusRequestElement.textContent =
+                    "Vamos tentar outra vez! Escolha um ambiente bem iluminado e mantenha a câmera firme!";
+            }
             statusElement.textContent = "Preparando nova tentativa...";
 
             setTimeout(async () => {
                 await refreshSessionAndRestart();
-            }, 4000);
-            } else {
-                statusRequestElement.textContent = "Não foi possível avançar com sua verificação. Uma nova sessão deve ser gerada";
-            }
+            }, 5000);
+        } else {
+            statusRequestElement.textContent = "Não foi possível avançar com sua verificação. Uma nova sessão deve ser gerada";
+        }
     }
 
     const refreshSessionAndRestart = async () => {
@@ -310,6 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         isLoading = true;
         statusRequestElement.textContent = null;
+        userFeedbackElement.textContent = null;
 
         await fetchSessionData();
 
@@ -321,13 +338,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const deleteAppKey = () => {
         window.localStorage.removeItem('appkey');
         window.localStorage.removeItem('hasLiveness');
-      
-        window.location.href = '/';
-      };
 
-      btnDeleteAppKey.addEventListener('click', () => {
+        window.location.href = '/';
+    };
+
+    btnDeleteAppKey.addEventListener('click', () => {
         deleteAppKey();
-      });
+    });
 
     const getLanguage = async () => {
         try {
@@ -340,7 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return null;
         }
     };
-    
+
     window.onload = () => {
         fetchSessionData();
     };
