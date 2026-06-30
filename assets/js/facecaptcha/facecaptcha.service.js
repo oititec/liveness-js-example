@@ -87,6 +87,64 @@ const facecaptchaService = (function () {
     return challenge;
   }
 
+  async function credential(login, senha) {
+    const params = new URLSearchParams();
+
+    params.append('user', login);
+    params.append('pass', senha);
+
+    const response = await fetch(
+      `${SERVER_API_URL}/facecaptcha/service/captcha/credencial`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params.toString(),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error('Erro ao autenticar');
+    }
+
+    return {
+      data: await response.json()
+    };
+  }
+
+  async function gerarAppkey(cpf, nome, nascimento) {
+    const token = localStorage.getItem('credentialResponse');
+    const login = localStorage.getItem('login');
+
+    const params = new URLSearchParams();
+
+    params.append('token', token || '');
+    params.append('user', login || '');
+    params.append('cpf', cpf);
+    params.append('nome', nome);
+    params.append('nascimento', nascimento);
+
+    const response = await fetch(
+      `${SERVER_API_URL}/facecaptcha/service/captcha/appkey`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params.toString(),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error('Erro ao gerar appkey');
+    }
+
+    return {
+      data: await response.json()
+    };
+  }
+
   async function captcha(appkey, chkey, images) {
     const url = `${SERVER_API_URL}/facecaptcha/service/captcha`;
 
@@ -170,12 +228,40 @@ const facecaptchaService = (function () {
       .catch((error) => console.log('error', error));
   }
 
+  async function getLivenessResult(appkey) {
+    const params = new URLSearchParams();
+
+    params.append('appkey', appkey);
+
+    const response = await fetch(
+      `${SERVER_API_URL}/facecaptcha/service/captcha/result`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params.toString(),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error('Erro ao buscar resultado');
+    }
+
+    return {
+      data: await response.json()
+    };
+  }
+
   return {
     getProductionKey,
     decryptProductionKey,
+    credential,
+    gerarAppkey,
     startChallenge,
     captcha,
     getSessionToken,
     sendDocument,
+    getLivenessResult
   };
 })();

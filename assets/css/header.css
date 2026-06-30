@@ -1,0 +1,32 @@
+.logo {
+  width: 150px;
+}
+
+.btn-rounded {
+  border-radius: 50px;
+  white-space: nowrap;
+}
+
+@media (max-width: 991.98px) {
+
+  .navbar-collapse {
+    margin-top: 1rem;
+  }
+
+  #menuButtons,
+  #resultButtons {
+    width: 100%;
+  }
+
+  #menuButtons button,
+  #resultButtons button {
+    width: 100%;
+    margin-bottom: .5rem;
+  }
+
+  #statusAppkey,
+  #statusResult {
+    text-align: center;
+    margin-bottom: .5rem;
+  }
+}

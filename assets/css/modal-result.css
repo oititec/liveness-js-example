@@ -1,0 +1,31 @@
+.modal-result {
+  max-width: 550px !important;
+}
+
+.modal-result .modal-content {
+  border: solid 4px #1648cd;
+  border-radius: 24px;
+  padding: 24px;
+}
+
+.custom-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: none;
+  padding-bottom: 16px;
+}
+
+.custom-modal-header h2 {
+  margin: 0;
+}
+
+.result-json {
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 16px;
+  border-radius: 8px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+}

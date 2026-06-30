@@ -1,116 +1,138 @@
-let txtAppkey = document.getElementById('txt-appkey');
-let btnContinuar = document.getElementById('btn-continuar');
-let btnCarregando = document.getElementById('btn-carregando');
-let errorMessage = document.getElementById('error-message');
-let deviceType = document.getElementById('device-type');
-let os = document.getElementById('os');
-let userAgent = document.getElementById('user-agent');
-let deviceModel = document.getElementById('device-model');
-let btnUserAgent = document.getElementById('btn-user-agent');
+const cpfInput = document.getElementById("cpf");
+const nomeInput = document.getElementById("nome");
+const nascimentoInput = document.getElementById("nascimento");
+const btnGerar = document.getElementById("btnGerar");
+const statusEl = document.getElementById("status");
 
-const initialState = () => {
-  btnContinuar.classList.remove('d-none');
-  btnCarregando.classList.add('d-none');
-};
+let cpf = "";
+let nome = "";
+let nascimento = "";
 
-const setAppKeyValue = () => {
-  btnContinuar.classList.add('d-none');
-  btnCarregando.classList.remove('d-none');
-};
+function onCpfInput(e) {
+  let value = e.target.value.replace(/\D/g, "");
 
-const isMobile = () => {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent
+  if (value.length > 11) {
+    value = value.substring(0, 11);
+  }
+
+  value = value.replace(/^(\d{3})(\d)/, "$1.$2");
+  value = value.replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3");
+  value = value.replace(/\.(\d{3})(\d)/, ".$1-$2");
+
+  cpf = value;
+  cpfInput.value = value;
+
+  atualizarBotao();
+}
+
+function onDataNascimentoInput(e) {
+  let value = e.target.value.replace(/\D/g, "");
+
+  if (value.length > 8) {
+    value = value.substring(0, 8);
+  }
+
+  if (value.length > 2) {
+    value = value.replace(/^(\d{2})(\d)/, "$1/$2");
+  }
+
+  if (value.length > 5) {
+    value = value.replace(
+      /^(\d{2})\/(\d{2})(\d)/,
+      "$1/$2/$3"
+    );
+  }
+
+  nascimento = value;
+  nascimentoInput.value = value;
+
+  atualizarBotao();
+}
+
+function dataValida() {
+  return (
+    nascimento === "" ||
+    /^\d{2}\/\d{2}\/\d{4}$/.test(nascimento)
   );
-};
+}
 
-const removeAppKeyValue = () => {
-  window.localStorage.removeItem('appkey');
-};
+function formularioValido() {
+  return (
+    cpf.trim().length > 0 &&
+    nome.trim().length > 0 &&
+    /^.+\s+.+$/.test(nome) &&
+    dataValida()
+  );
+}
 
-window.onload = () => {
-  initialState();
-  removeAppKeyValue();
+function atualizarBotao() {
+  btnGerar.disabled = !formularioValido();
+}
 
-  btnContinuar.addEventListener('click', async () => {
-    setAppKeyValue();
+cpfInput.addEventListener("input", onCpfInput);
 
-    let appkey = txtAppkey.value;
-    let url = `${env.BASE_URL}/facecaptcha/service/captcha/checkauth?appkey=${appkey}`;
+nomeInput.addEventListener("input", (e) => {
+  nome = e.target.value;
+  atualizarBotao();
+});
 
-    let requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-    };
+nascimentoInput.addEventListener(
+  "input",
+  onDataNascimentoInput
+);
 
-    await fetch(url, requestOptions)
-      .then((response) => response.text())
-      .then(() => {
-        window.localStorage.setItem('appkey', appkey);
+async function enviar() {
+  try {
 
-        setTimeout(() => {
-          window.location.href = '/home/index.html';
-        }, 1000);
-      })
-      .catch(() => {
-        initialState();
+    statusEl.textContent = "";
 
-        errorMessage.innerHTML = 'Não autorizado';
-      });
-  });
+    const cpfSemMascara = cpf.replace(/\D/g, "");
 
-  btnUserAgent.addEventListener('click', async () => {
-    let userAgentNav = navigator.userAgent;
-    let returnMessage;
-    let mobileBrand;
+    const response =
+      await facecaptchaService.gerarAppkey(
+        cpfSemMascara,
+        nome,
+        nascimento
+      );
 
-    if (/windows phone/i.test(userAgentNav)) {
-      returnMessage = 'Windows Phone';
-    } else if (/windows/i.test(userAgentNav)) {
-      returnMessage = 'Windows';
-    } else if (/Android/i.test(userAgentNav)) {
-      returnMessage = 'Android';
-    } else if (/iPad|iPhone|iPod/i.test(userAgentNav)) {
-      returnMessage = 'iOS';
-    } else if (/Unix/i.test(userAgentNav)) {
-      returnMessage = 'Unix';
-    } else if (/Mac/i.test(userAgentNav)) {
-      returnMessage = 'Macos';
-    } else if (/Linux/i.test(userAgentNav)) {
-      returnMessage = 'Linux';
-    } else if (/BlackBerry/i.test(userAgentNav)) {
-      returnMessage = 'BlackBerry';
-    } else {
-      returnMessage = 'Desconhecido';
-    }
+    localStorage.setItem(
+      "cpf",
+      cpfSemMascara
+    );
 
-    // Funciona apenas para Android
-    if (/Android/i.test(userAgentNav)) {
-      mobileBrand = await navigator.userAgentData
-        .getHighEntropyValues([
-          'architecture',
-          'model',
-          'platform',
-          'platformVersion',
-          'fullVersionList',
-        ])
-        .then((ua) => {
-          return ua.model;
-        })
-        .catch((err) => {
-          return err;
-        });
-    } else {
-      mobileBrand = navigator.platform;
-    }
+    localStorage.setItem(
+      "nome",
+      nome
+    );
 
-    deviceType.innerHTML = `Tipo de dispositivo: ${
-      isMobile() ? 'Dispositívo móvel' : 'Desktop'
-    }`;
-    os.innerHTML = `Sistema operacional: ${returnMessage}`;
-    userAgent.innerHTML = `User agent: ${userAgentNav}`;
-    deviceModel.innerHTML = `${
-      isMobile() ? `Modelo do aparelho: ${mobileBrand}` : ''
-    }`;
-  });
-};
+    localStorage.setItem(
+      "nascimento",
+      nascimento
+    );
+
+    localStorage.setItem(
+      "appkey",
+      response.data.appkey
+    );
+
+    window.location.href = "/home/index.html";
+
+  } catch (error) {
+
+    console.error(error);
+
+    statusEl.textContent =
+      "Dados inválidos!";
+  }
+}
+
+btnGerar.addEventListener(
+  "click",
+  async (e) => {
+    e.preventDefault();
+    await enviar();
+  }
+);
+
+atualizarBotao();
+
