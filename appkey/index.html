@@ -9,75 +9,56 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/appkey.css">
+  <link rel="stylesheet" href="/assets/css/misc.css">
   <link rel="icon" href="/assets/favicon.ico" />
 </head>
 
 <body>
-  <div class="container-fluir p-0">
-    <div class="row">
-      <div class="col-12 px-0">
-        <nav class="navbar navbar-expand navbar-light bg-light">
-          <div class="container">
-            <a class="navbar-brand" href="/">
-              <img src='/assets/img/logo_certiface_trans.png' alt="Logo CertiFace" class="logo"/>
-            </a>
-          </div>
-        </nav>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class='col-12'>
-          <h1 class="my-4 text-center">
-            Para usar a aplicação, por favor insira uma AppKey válida.
-          </h1>
-        </div>
-        <!-- <div class='col-12'>
-          <div class="row">
-            <div class='col-10'>
-              <input id="txt-appkey" type="text" id="txt-appkey" class="form-control">
-            </div>
-            <div class='col-2'>
-              <button id="btn-continuar" type="button" class="btn btn-primary w-100">Continuar</button>
-              <button id="btn-carregando" type="button" class="btn btn-primary w-100">Carregando...</button>
-            </div>
-            <div id="error-message" class='col-12'></div>
-            <div class="col-12">
-              <hr />
-            </div>
-            <div class="col-12">
-              <button id="btn-user-agent" type="button" class="btn btn-primary w-100">Detectar userAgent</button>
-            </div>
-            <div id="device-type" class="col-12"></div>
-            <div id="os" class="col-12"></div>
-            <div id="user-agent" class="col-12"></div>
-            <div id="device-model" class="col-12"></div>
-          </div>
-        </div> -->
+  <div data-component></div>
+  <div class="container">
+    <div class="container-fluid content-screen">
+      <div class="row g-0 h-100">
 
+        <div class="col-md-6 d-flex justify-content-center">
+          <div class="content-area">
 
-        <div class='col-12'>
-          <div class="row g-2">
-            <div class='col-12 col-md-10'>
-              <input id="txt-appkey" type="text" class="form-control">
+            <h1 class="h1-title"><strong>CertiFace Sample Web</strong></h1>
+
+            <p class="sub-title">
+              Agora gere uma AppKey informando seus dados.
+            </p>
+
+            <div class="mb-3">
+              <span id="status" style="color:red;font-weight:bold"></span>
             </div>
-            <div class='col-12 col-md-2'>
-              <button id="btn-continuar" type="button" class="btn btn-primary w-100">Continuar</button>
-              <button id="btn-carregando" type="button" class="btn btn-primary w-100">Carregando...</button>
+
+            <div class="mb-3">
+              <label><strong>CPF</strong></label>
+              <input id="cpf" class="form-control" placeholder="Informe o CPF">
             </div>
-            <div id="error-message" class='col-12'></div>
-            <div class="col-12">
-              <hr />
+
+            <div class="mb-3">
+              <label><strong>Nome</strong></label>
+              <input id="nome" class="form-control" placeholder="Informe o nome">
             </div>
-            <div class="col-12">
-              <button id="btn-user-agent" type="button" class="btn btn-primary w-100">Detectar userAgent</button>
+
+            <div class="mb-3">
+              <label><strong>Data de nascimento</strong></label>
+              <input id="nascimento" class="form-control" placeholder="Informe a data de nascimento">
             </div>
-            <div id="device-type" class="col-12"></div>
-            <div id="os" class="col-12"></div>
-            <div id="user-agent" class="col-12"></div>
-            <div id="device-model" class="col-12"></div>
+
+            <button id="btnGerar" class="btn btn-success btn-rounded me-4 w-100">
+              <strong>Gerar AppKey</strong>
+            </button>
+
           </div>
         </div>
+
+        <div class="col-md-6 d-none d-md-flex pt-3 ps-0 pe-0 pb-0">
+          <img src="/assets/img/img-certiface-dados.jpg" alt="Login" class="img-login">
+        </div>
+
       </div>
     </div>
   </div>
@@ -85,5 +66,8 @@
 
 <script src="/assets/js/env.js"></script>
 <script src="/assets/js/appkey/appkey.js"></script>
+<script src="/assets/js/facecaptcha/facecaptcha.service.js"></script>
+<script src="/assets/js/header/header.js"></script>
+<script src="/assets/js/header/header-loader.js"></script>
 
 </html>
