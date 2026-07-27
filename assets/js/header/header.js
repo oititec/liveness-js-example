@@ -9,7 +9,8 @@ function updateHeader() {
     page.includes('/liveness-2d') ||
     page.includes('/liveness-3d') ||
     page.includes('/liveness-iproov') ||
-    page.includes('/facetec-v10');
+    page.includes('/facetec-v10') ||
+    page.includes('/fortface');
 
   if (isHome) {
     menuButtons.classList.remove("d-none");
@@ -59,6 +60,7 @@ function alterarDados() {
 
 function novaSessao() {
   localStorage.removeItem('login');
+  localStorage.removeItem('senhaMd5');
   localStorage.removeItem('credentialResponse');
   limparLocalStorage();
   window.location.href = '/';

@@ -41,10 +41,8 @@ form.addEventListener('submit', async (e) => {
     );
 
     localStorage.setItem('login', login);
-    localStorage.setItem(
-      'credentialResponse',
-      JSON.stringify(response.data)
-    );
+    localStorage.setItem('senhaMd5', md5(senha));
+    localStorage.setItem('credentialResponse', JSON.stringify(response.data));
 
     window.location.href = '/appkey/index.html';
 
