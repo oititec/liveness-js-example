@@ -253,6 +253,48 @@ const facecaptchaService = (function () {
     };
   }
 
+  async function createFortfaceSession(appkey, userAgent, deviceRequestInfo) {
+    const url = `${SERVER_API_URL}/facecaptcha/service/captcha/fortface/session-token`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        appkey,
+        userAgent,
+        deviceRequestInfo
+      })
+    });
+
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error('Erro ao criar sessão');
+    }
+
+    return await response.json();
+  }
+
+  async function verifyFortfaceLiveness(livenessInfo) {
+    const url = `${SERVER_API_URL}/facecaptcha/service/captcha/fortface/liveness`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(livenessInfo)
+    });
+
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error('Erro ao validar o liveness');
+    }
+
+    return await response.json();
+  }
+
   return {
     getProductionKey,
     decryptProductionKey,
@@ -262,6 +304,8 @@ const facecaptchaService = (function () {
     captcha,
     getSessionToken,
     sendDocument,
-    getLivenessResult
+    getLivenessResult,
+    createFortfaceSession,
+    verifyFortfaceLiveness
   };
 })();
