@@ -64,7 +64,7 @@ _data: 04/11/2025_
 
 ### [FaceTec SDK: 9.7.127](https://github.com/oititec/liveness-js-example/blob/main/assets/js/9.7.127)
 
-_data: 20/05/2026_
+_data: 20/07/2026_
 - Aprimoramentos nas verificações de injeção de vídeo no dispositivo e no servidor para mitigar ameaças relacionadas à IA generativa.
 - Melhorias na taxa de sucesso e na compatibilidade com dispositivos.
 - Melhorias de desempenho e velocidade.
